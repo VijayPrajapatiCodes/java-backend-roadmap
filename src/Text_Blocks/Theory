@@ -1,0 +1,35 @@
+Java 15
+
+Multiline String
+
+Purana
+
+String html =
+
+"<html>\n"+
+
+"<body>\n"+
+
+"</body>\n"+
+
+"</html>";
+
+
+
+Modern
+
+String html = """
+
+<html>
+
+<body>
+
+Hello
+
+</body>
+
+</html>
+
+""";
+
+Readable.

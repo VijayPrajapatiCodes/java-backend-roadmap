@@ -1,0 +1,55 @@
+Optional.map()
+Definition
+
+Agar Optional ke andar value hai to usko transform karo.
+
+Agar value nahi hai to kuch mat karo.
+
+Visual
+
+Optional
+
+↓
+
+Value Hai?
+
+↓
+
+YES
+
+↓
+
+Transform
+
+↓
+
+New Optional
+
+-----------------
+
+NO
+
+↓
+
+Optional.empty()
+Program 1
+import java.util.Optional;
+
+public class OptionalMap {
+
+public static void main(String[] args) {
+
+Optional<String> name =
+Optional.of("Vijay");
+
+Optional<String> upperCase =
+name.map(String::toUpperCase);
+
+System.out.println(upperCase);
+
+}
+}
+
+Output
+
+Optional[VIJAY]

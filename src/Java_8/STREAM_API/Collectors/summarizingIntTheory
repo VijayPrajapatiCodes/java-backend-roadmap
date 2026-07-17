@@ -1,0 +1,52 @@
+Collectors.summarizingInt()
+Ek Line Definition
+
+Ek hi Stream se Count + Sum + Average + Min + Max sab ek saath nikalna ho to summarizingInt() use karte hain.
+
+Ye production me reports aur dashboards banane ke liye bahut use hota hai.
+
+Problem
+
+Suppose tumhare paas students ke marks hain.
+
+Rahul  80
+Amit   65
+Neha   90
+Riya   70
+Ankit  85
+
+Ab manager bolta hai
+
+Total Students
+
+Total Marks
+
+Average Marks
+
+Highest Marks
+
+Lowest Marks
+
+Purane Java me
+
+int sum = 0;
+int max = Integer.MIN_VALUE;
+int min = Integer.MAX_VALUE;
+
+for(Student s : students){
+    sum += s.getMarks();
+
+    if(s.getMarks() > max)
+        max = s.getMarks();
+
+    if(s.getMarks() < min)
+        min = s.getMarks();
+}
+
+double average = (double)sum / students.size();
+
+Bahut code.
+
+Java 8 ne bola
+
+Ek Collector se sab de deta hu.

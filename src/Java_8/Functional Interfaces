@@ -1,0 +1,4 @@
+Predicate<T>     → Input leta hai, boolean deta hai
+Consumer<T>      → Input leta hai, kuch return nahi karta
+Supplier<T>      → Input nahi leta, value return karta hai
+Function<T, R>   → Input leta hai, doosri value return karta hai

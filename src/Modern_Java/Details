@@ -1,0 +1,48 @@
+JAVA 8
+──────────────────────────────
+✅ Lambda Expression
+✅ Functional Interface
+✅ Method Reference
+✅ Optional
+✅ Stream API
+✅ filter()
+✅ map()
+✅ flatMap()
+✅ sorted()
+✅ distinct()
+✅ limit()
+✅ skip()
+✅ reduce()
+✅ Predicate
+✅ Function
+✅ Consumer
+✅ Supplier
+✅ Comparator
+✅ Collectors
+   ✅ toList()
+   ✅ toSet()
+   ✅ groupingBy()
+   ✅ partitioningBy()
+   ✅ toMap()
+   ✅ joining()
+   ✅ summarizingInt()
+
+JAVA 10+
+──────────────────────────────
+✅ var
+
+JAVA 14+
+──────────────────────────────
+✅ Modern Switch Expression
+
+JAVA 15+
+──────────────────────────────
+✅ Text Blocks
+
+JAVA 16+
+──────────────────────────────
+✅ Records
+
+Parallel Processing
+──────────────────────────────
+✅ Parallel Stream

@@ -1,0 +1,11 @@
+Function kya hota hai?
+
+Function<T, R> ek input leta hai aur us input ko process/transform karke ek output return karta hai.
+
+Input → Process / Transform → Output
+  T                              R
+
+Example:
+
+"Vijay" → name.length() → 5
+ String                  Integer

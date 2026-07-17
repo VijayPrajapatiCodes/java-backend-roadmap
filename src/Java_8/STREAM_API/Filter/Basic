@@ -1,0 +1,69 @@
+filter()
+
+↓
+
+Predicate
+
+↓
+
+boolean
+
+↓
+
+true → Keep
+
+false → Remove
+
+Ye interview me bahut pucha jata hai:
+
+Q. filter() kis Functional Interface ka use karta hai?
+
+Answer:
+
+Predicate<T>
+
+
+⭐ filter() — Most Important Stream Operation
+
+filter() Collection me se sirf wahi elements select karta hai jo kisi condition ko satisfy karte hain.
+
+Simple definition:
+
+Collection
+      ↓
+filter(condition)
+      ↓
+Sirf matching data
+Real Life Example
+
+Maan lo class me 10 students hain.
+
+Rahul   - 35 Marks
+Vijay   - 90 Marks
+Aman    - 20 Marks
+Rohit   - 80 Marks
+
+Ab teacher bolta hai:
+
+"Sirf PASS students dikhao."
+
+Result:
+
+Vijay - 90
+Rohit - 80
+
+Yehi kaam filter() karta hai.
+
+Syntax
+stream.filter(predicate)
+
+Sabse important baat:
+
+filter() ke andar Predicate<T> lagta hai.
+
+Yaad hai?
+
+Predicate<Integer> isAdult =
+        age -> age >= 18;
+
+Same concept yahan use hota hai.

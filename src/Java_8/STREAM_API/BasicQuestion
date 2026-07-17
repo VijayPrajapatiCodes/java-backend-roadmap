@@ -1,0 +1,64 @@
+PART 1
+✅ Stream Introduction
+✅ Collection vs Stream
+✅ stream()
+✅ forEach()
+
+PART 2
+✅ filter() ⭐⭐⭐⭐⭐
+✅ map() ⭐⭐⭐⭐⭐
+✅ sorted()
+✅ distinct()
+✅ limit()
+✅ skip()
+
+PART 3
+✅ collect()
+✅ reduce()
+✅ count()
+✅ min()
+✅ max()
+✅ anyMatch()
+✅ allMatch()
+✅ noneMatch()
+
+PART 4
+✅ groupingBy()
+✅ partitioningBy()
+✅ Advanced Interview Questions
+
+
+1. Stream API kya hai?
+
+Simple definition:
+
+Stream API Collection ke data ko process karne ka modern aur powerful tarika hai.
+
+Maan lo tumhare paas students ki list hai.
+
+List<String> students = List.of(
+        "Vijay",
+        "Rahul",
+        "Aman",
+        "Rohit"
+);
+
+Purana Java (Loop)
+
+for(String name : students){
+    System.out.println(name);
+}
+
+Modern Java
+
+students.stream()
+        .forEach(System.out::println);
+
+Output
+
+Vijay
+Rahul
+Aman
+Rohit
+
+Dono ka output same hai.

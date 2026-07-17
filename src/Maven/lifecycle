@@ -1,0 +1,50 @@
+Validate
+
+↓
+
+Compile
+
+↓
+
+Test
+
+↓
+
+Package
+
+↓
+
+Verify
+
+↓
+
+Install
+
+↓
+
+Deploy
+
+
+
+ander kya hua
+✔ pom.xml validate
+
+↓
+
+✔ Java compile
+
+↓
+
+✔ JUnit tests
+
+↓
+
+✔ vijaybaazar.jar
+
+↓
+
+✔ Verify
+
+↓
+
+✔ Save in .m2

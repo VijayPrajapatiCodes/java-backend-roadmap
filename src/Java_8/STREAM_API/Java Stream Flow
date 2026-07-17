@@ -1,0 +1,93 @@
+Stream
+   │
+   ▼
+filter()      ← Lazy
+   │
+map()         ← Lazy
+   │
+sorted()      ← Lazy
+   │
+distinct()    ← Lazy
+   │
+limit()       ← Lazy
+   │
+──────────────
+forEach()     ← Eager (Terminal)
+collect()     ← Eager (Terminal)
+count()       ← Eager (Terminal)
+reduce()      ← Eager (Terminal)
+findFirst()   ← Eager (Terminal)
+
+Interview me agar puchha jaye:
+
+Q. Why are Streams lazy?
+
+Answer:
+
+Stream ki intermediate operations (filter(), map(), sorted()) lazy hoti hain. Ye turant execute nahi hoti, sirf operation ko pipeline me store karti hain. Jab koi terminal operation (forEach(), collect(), count() etc.) call hota hai, tab poori pipeline ek saath execute hoti hai. Isse unnecessary processing nahi hoti aur performance better hoti hai.
+
+Intermediate Operations
+-----------------------
+filter()
+map()
+flatMap()
+sorted()
+distinct()
+limit()
+skip()
+peek()
+
+Sab = Lazy
+
+Terminal Operations
+-------------------
+forEach()
+collect()
+count()
+reduce()
+findFirst()
+findAny()
+min()
+max()
+toArray()
+
+Sab = Eager
+
+Interview Question
+
+Q. Agar forEach() hata dein to kya hoga?
+
+list.stream()
+    .filter(n -> n % 2 == 0)
+    .map(n -> n * 10);
+Answer:
+
+Kuch bhi execute nahi hoga. Kyunki stream me sirf intermediate operations hain. Jab tak terminal operation (forEach(), collect(), count() etc.) nahi aayega, stream pipeline run nahi hogi.
+
+Interview Questions ⭐⭐⭐⭐⭐
+Q1. Stream lazy hai ya eager?
+
+Answer:
+
+Lazy
+Q2. Stream kab execute hoti hai?
+
+Answer:
+
+Terminal Operation aane par.
+Q3. Kya Stream reusable hai?
+
+Answer:
+
+No.
+
+One Time Use.
+Q4. Stream data store karti hai?
+
+Answer:
+
+No.
+
+Collection data store karti hai.
+
+Stream sirf process karti hai.

@@ -1,0 +1,2757 @@
+# JAVA MULTITHREADING — COMPLETE NOTES
+
+## 1. Multitasking kya hai?
+
+Multitasking ka matlab hai ek system par multiple tasks ko ek saath ya apparently ek saath execute karna.
+
+Example:
+
+- Music chal raha hai
+- File download ho rahi hai
+- Browser open hai
+- Code compile ho raha hai
+
+Multitasking do main types ki hoti hai:
+
+1. Process-based multitasking
+2. Thread-based multitasking
+
+
+============================================================
+2. PROCESS KYA HAI?
+============================================================
+
+Process ek running program hota hai.
+
+Example:
+
+Chrome
+IntelliJ IDEA
+DataGrip
+Spotify
+
+Jab koi application run hoti hai, operating system uske liye ek process create karta hai.
+
+Example:
+
+IntelliJ IDEA
+      ↓
+    Process
+
+
+============================================================
+3. THREAD KYA HAI?
+============================================================
+
+Thread ek process ke andar execution ka ek path hota hai.
+
+Ek process ke andar multiple threads ho sakte hain.
+
+Example:
+
+Music Application
+       |
+       |--- Thread 1 → Music Play
+       |
+       |--- Thread 2 → Download Song
+       |
+       |--- Thread 3 → Update UI
+
+
+Simple Definition:
+
+Thread is a lightweight unit of execution inside a process.
+
+
+============================================================
+4. PROCESS VS THREAD
+============================================================
+
+PROCESS:
+
+- Independent running program
+- More memory use karta hai
+- Process creation expensive hoti hai
+- Processes ke beech communication relatively difficult hota hai
+
+
+THREAD:
+
+- Process ke andar execution unit
+- Lightweight hota hai
+- Same process ke threads memory/resources share kar sakte hain
+- Thread creation generally cheaper hoti hai
+
+
+Example:
+
+Process
+   |
+   |--- Thread 1
+   |--- Thread 2
+   |--- Thread 3
+
+
+============================================================
+5. MULTITHREADING KYA HAI?
+============================================================
+
+Ek process ke andar multiple threads ka concurrent execution multithreading kehlata hai.
+
+Example:
+
+Web Server
+    |
+    |--- Request 1
+    |--- Request 2
+    |--- Request 3
+
+
+Benefits:
+
+- Better responsiveness
+- Multiple tasks handle kar sakte hain
+- CPU resources ka better utilization ho sakta hai
+- Background tasks execute kar sakte hain
+- Server applications me multiple requests handle karne me useful
+
+
+Important:
+
+Multithreading ka matlab hamesha true parallel execution nahi hota.
+
+Threads:
+
+- Concurrently execute ho sakte hain
+- Multi-core CPU par parallel bhi execute ho sakte hain
+
+
+============================================================
+6. CONCURRENCY VS PARALLELISM
+============================================================
+
+CONCURRENCY:
+
+Multiple tasks progress kar rahe hain.
+
+Example:
+
+Task A
+Task B
+Task C
+
+CPU inke beech switch kar sakta hai.
+
+
+PARALLELISM:
+
+Multiple tasks literally same time par execute ho rahe hain.
+
+Example:
+
+Core 1 → Task A
+Core 2 → Task B
+
+
+Simple:
+
+Concurrency = Multiple tasks in progress
+
+Parallelism = Multiple tasks executing simultaneously
+
+
+============================================================
+7. JAVA KA MAIN THREAD
+============================================================
+
+Har Java application normally main thread se start hoti hai.
+
+Example:
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        System.out.println(
+                Thread.currentThread().getName()
+        );
+    }
+}
+
+
+Output:
+
+main
+
+
+Current thread lene ke liye:
+
+Thread.currentThread()
+
+
+Thread ka name:
+
+Thread.currentThread().getName()
+
+
+============================================================
+8. THREAD CREATE KARNE KE BASIC WAYS
+============================================================
+
+Basic level par do common ways:
+
+1. Thread class extend karke
+2. Runnable interface implement karke
+
+
+Modern Java me tasks ko:
+
+- ExecutorService
+- CompletableFuture
+- Virtual Threads
+
+ke through bhi execute kiya jata hai.
+
+
+============================================================
+9. METHOD 1 — EXTENDING THREAD CLASS
+============================================================
+
+Example:
+
+class MyThread extends Thread {
+
+    @Override
+    public void run() {
+
+        System.out.println(
+                "Thread is running"
+        );
+    }
+}
+
+
+Main:
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        MyThread thread = new MyThread();
+
+        thread.start();
+    }
+}
+
+
+Flow:
+
+MyThread object
+      ↓
+start()
+      ↓
+New Thread
+      ↓
+run()
+
+
+Important:
+
+run() method ke andar wo task likhte hain jo new thread execute karega.
+
+
+============================================================
+10. start() VS run()
+============================================================
+
+Bahut important interview question.
+
+
+-------------------------
+run()
+-------------------------
+
+thread.run();
+
+Ye normal method call hai.
+
+New thread create nahi hota.
+
+Current thread hi run() execute karta hai.
+
+
+Example:
+
+Thread t = new Thread(() -> {
+
+    System.out.println(
+            Thread.currentThread().getName()
+    );
+
+});
+
+t.run();
+
+
+Output:
+
+main
+
+
+-------------------------
+start()
+-------------------------
+
+thread.start();
+
+Ye new thread start karta hai.
+
+JVM/Thread implementation new thread ke execution me run() method ko invoke karti hai.
+
+
+Example:
+
+Thread t = new Thread(() -> {
+
+    System.out.println(
+            Thread.currentThread().getName()
+    );
+
+});
+
+t.start();
+
+
+Possible Output:
+
+Thread-0
+
+
+Summary:
+
+run()
+    ↓
+Normal Method Call
+    ↓
+Current Thread
+
+
+start()
+    ↓
+New Thread Starts
+    ↓
+run() executes on new thread
+
+
+IMPORTANT:
+
+Ek Thread object ko generally sirf ek baar start kar sakte hain.
+
+Example:
+
+t.start();
+t.start();
+
+Second start par:
+
+IllegalThreadStateException
+
+
+============================================================
+11. METHOD 2 — RUNNABLE INTERFACE
+============================================================
+
+Example:
+
+class MyTask implements Runnable {
+
+    @Override
+    public void run() {
+
+        System.out.println(
+                "Task Running"
+        );
+    }
+}
+
+
+Main:
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        MyTask task = new MyTask();
+
+        Thread thread = new Thread(task);
+
+        thread.start();
+    }
+}
+
+
+Flow:
+
+Runnable
+   ↓
+Task define karta hai
+
+Thread
+   ↓
+Task execute karta hai
+
+
+Simple:
+
+Runnable = Kya kaam karna hai
+
+Thread = Kaun execute karega
+
+
+============================================================
+12. THREAD VS RUNNABLE
+============================================================
+
+THREAD:
+
+class MyThread extends Thread
+
+Problem:
+
+Java me class multiple classes ko extend nahi kar sakti.
+
+Agar Thread extend kar diya:
+
+class MyThread extends Thread
+
+to kisi aur class ko extend nahi kar sakte.
+
+
+RUNNABLE:
+
+class MyTask implements Runnable
+
+Ab class kisi aur class ko extend bhi kar sakti hai.
+
+Example:
+
+class MyTask extends Parent
+             implements Runnable
+
+
+Runnable task ko thread se separate karta hai.
+
+Generally:
+
+Runnable-based task design zyada flexible hota hai.
+
+
+============================================================
+13. MULTIPLE THREADS
+============================================================
+
+Example:
+
+class MyTask implements Runnable {
+
+    @Override
+    public void run() {
+
+        for (int i = 1; i <= 5; i++) {
+
+            System.out.println(
+                    Thread.currentThread().getName()
+                    + " : "
+                    + i
+            );
+        }
+    }
+}
+
+
+Main:
+
+MyTask task = new MyTask();
+
+Thread t1 = new Thread(task);
+Thread t2 = new Thread(task);
+
+t1.start();
+t2.start();
+
+
+Possible Output:
+
+Thread-0 : 1
+Thread-1 : 1
+Thread-0 : 2
+Thread-1 : 2
+
+
+IMPORTANT:
+
+Output order guaranteed nahi hota.
+
+Thread scheduling JVM aur Operating System scheduler par depend karti hai.
+
+
+============================================================
+14. THREAD SCHEDULER
+============================================================
+
+Thread Scheduler decide karta hai:
+
+- Kaunsa runnable thread CPU use karega
+- Kitni der execute karega
+- Kab dusre thread ko chance milega
+
+
+Programmer exact execution order normally guarantee nahi kar sakta.
+
+
+Example:
+
+t1.start();
+t2.start();
+
+
+Iska matlab ye nahi:
+
+Pehle t1 complete hoga
+Phir t2 start hoga
+
+
+Actual execution order vary kar sakta hai.
+
+
+============================================================
+15. THREAD METHODS
+============================================================
+
+Important methods:
+
+start()
+
+New thread start karta hai.
+
+
+run()
+
+Thread ka task contain karta hai.
+
+
+getName()
+
+Thread ka name return karta hai.
+
+
+setName()
+
+Thread ka name change karta hai.
+
+
+currentThread()
+
+Currently executing thread return karta hai.
+
+
+sleep()
+
+Current thread ko temporary pause karta hai.
+
+
+join()
+
+Ek thread ko dusre thread ke complete hone ka wait karwata hai.
+
+
+isAlive()
+
+Check karta hai thread alive hai ya nahi.
+
+
+getState()
+
+Thread ki current state return karta hai.
+
+
+interrupt()
+
+Thread ko interruption request bhejta hai.
+
+
+============================================================
+16. THREAD NAME
+============================================================
+
+Example:
+
+Thread t = new Thread(() -> {
+
+    System.out.println(
+            Thread.currentThread().getName()
+    );
+
+});
+
+
+Set Name:
+
+t.setName("Download-Thread");
+
+
+Start:
+
+t.start();
+
+
+Output:
+
+Download-Thread
+
+
+Constructor se bhi name de sakte hain:
+
+Thread t = new Thread(
+        task,
+        "Worker-Thread"
+);
+
+
+============================================================
+17. sleep()
+============================================================
+
+sleep() current thread ko specified time ke liye pause karta hai.
+
+
+Example:
+
+for (int i = 1; i <= 5; i++) {
+
+    System.out.println(i);
+
+    try {
+
+        Thread.sleep(1000);
+
+    } catch (InterruptedException e) {
+
+        Thread.currentThread().interrupt();
+    }
+}
+
+
+1000 milliseconds = 1 second
+
+
+IMPORTANT:
+
+Thread.sleep(1000);
+
+Current executing thread ko sleep karata hai.
+
+
+sleep() throws:
+
+InterruptedException
+
+
+Important:
+
+sleep() kisi held monitor lock ko automatically release nahi karta.
+
+
+============================================================
+18. join()
+============================================================
+
+join() ka use ek thread ke completion ka wait karne ke liye hota hai.
+
+
+Example:
+
+Thread t1 = new Thread(() -> {
+
+    for (int i = 1; i <= 5; i++) {
+
+        System.out.println(i);
+    }
+});
+
+
+t1.start();
+
+t1.join();
+
+System.out.println("Completed");
+
+
+Flow:
+
+Main Thread
+    ↓
+t1.start()
+    ↓
+t1 running
+
+Main Thread
+    ↓
+t1.join()
+    ↓
+Wait
+
+t1 completes
+    ↓
+Main continues
+
+
+============================================================
+19. isAlive()
+============================================================
+
+Check karta hai ki thread abhi alive hai ya nahi.
+
+
+Example:
+
+Thread t = new Thread(() -> {
+
+    System.out.println("Running");
+
+});
+
+
+System.out.println(t.isAlive());
+
+t.start();
+
+System.out.println(t.isAlive());
+
+t.join();
+
+System.out.println(t.isAlive());
+
+
+Possible Output:
+
+false
+true
+false
+
+
+============================================================
+20. THREAD LIFECYCLE
+============================================================
+
+Java Thread.State ke official states:
+
+1. NEW
+2. RUNNABLE
+3. BLOCKED
+4. WAITING
+5. TIMED_WAITING
+6. TERMINATED
+
+
+Flow:
+
+NEW
+ ↓
+RUNNABLE
+ ↓
+BLOCKED / WAITING / TIMED_WAITING
+ ↓
+RUNNABLE
+ ↓
+TERMINATED
+
+
+-------------------------
+NEW
+-------------------------
+
+Thread object create hua hai.
+
+start() call nahi hua.
+
+
+Example:
+
+Thread t = new Thread();
+
+
+-------------------------
+RUNNABLE
+-------------------------
+
+start() call ho chuka hai.
+
+Thread JVM ke according runnable/running execution state me hai.
+
+Java Thread.State me separate official RUNNING state nahi hai.
+
+
+-------------------------
+BLOCKED
+-------------------------
+
+Thread synchronized monitor lock ka wait kar raha hai.
+
+
+-------------------------
+WAITING
+-------------------------
+
+Thread indefinitely kisi event/action ka wait kar raha hai.
+
+Examples:
+
+join()
+wait()
+
+
+-------------------------
+TIMED_WAITING
+-------------------------
+
+Thread limited time ke liye wait kar raha hai.
+
+Examples:
+
+sleep(1000)
+join(1000)
+wait(1000)
+
+
+-------------------------
+TERMINATED
+-------------------------
+
+run() method complete ho gaya.
+
+
+============================================================
+21. INTERRUPT()
+============================================================
+
+interrupt() thread ko forcefully kill nahi karta.
+
+Ye thread ko interruption request/signal bhejta hai.
+
+
+Example:
+
+Thread t = new Thread(() -> {
+
+    try {
+
+        Thread.sleep(5000);
+
+    } catch (InterruptedException e) {
+
+        System.out.println(
+                "Thread Interrupted"
+        );
+
+        Thread.currentThread().interrupt();
+    }
+
+});
+
+
+t.start();
+
+t.interrupt();
+
+
+Important:
+
+Modern Java me Thread.stop() use nahi karna chahiye.
+
+Cooperative cancellation prefer karte hain.
+
+
+============================================================
+22. SHARED RESOURCE
+============================================================
+
+Jab multiple threads same data/object ko access karte hain, use shared resource kaha ja sakta hai.
+
+
+Example:
+
+class Counter {
+
+    int count = 0;
+
+    void increment() {
+
+        count++;
+    }
+}
+
+
+Agar multiple threads same Counter object use karein:
+
+Counter counter = new Counter();
+
+Thread t1 → counter.increment()
+
+Thread t2 → counter.increment()
+
+
+to race condition ho sakti hai.
+
+
+============================================================
+23. RACE CONDITION
+============================================================
+
+Race condition tab hoti hai jab multiple threads shared mutable data ko concurrently access/modify karte hain aur result execution timing/order par depend karne lagta hai.
+
+
+Example:
+
+count++;
+
+
+Ye logically ek line hai, lekin conceptually multiple steps involve karta hai:
+
+1. count read karo
+2. increment karo
+3. value write karo
+
+
+Example:
+
+count = 5
+
+
+Thread 1 reads:
+
+5
+
+
+Thread 2 reads:
+
+5
+
+
+Thread 1 writes:
+
+6
+
+
+Thread 2 writes:
+
+6
+
+
+Expected:
+
+7
+
+
+Actual:
+
+6
+
+
+Isko Lost Update problem kaha ja sakta hai.
+
+
+============================================================
+24. RACE CONDITION EXAMPLE
+============================================================
+
+class Counter {
+
+    int count = 0;
+
+    public void increment() {
+
+        count++;
+    }
+}
+
+
+Main:
+
+Counter counter = new Counter();
+
+
+Thread t1 = new Thread(() -> {
+
+    for (int i = 0; i < 10000; i++) {
+
+        counter.increment();
+    }
+
+});
+
+
+Thread t2 = new Thread(() -> {
+
+    for (int i = 0; i < 10000; i++) {
+
+        counter.increment();
+    }
+
+});
+
+
+t1.start();
+t2.start();
+
+t1.join();
+t2.join();
+
+
+System.out.println(counter.count);
+
+
+Expected:
+
+20000
+
+
+Possible Actual:
+
+19872
+19940
+etc.
+
+
+Result run-to-run change ho sakta hai.
+
+
+============================================================
+25. synchronized
+============================================================
+
+synchronized ka use shared resource ke critical section ko protect karne ke liye kiya jata hai.
+
+
+Example:
+
+class Counter {
+
+    private int count = 0;
+
+    public synchronized void increment() {
+
+        count++;
+    }
+}
+
+
+Ab ek time par same object's synchronized instance method/monitor ke protected section me ek thread enter karega.
+
+
+Flow:
+
+Thread 1
+   ↓
+Lock Acquired
+   ↓
+increment()
+   ↓
+Lock Released
+
+
+Thread 2
+   ↓
+Wait
+   ↓
+Lock Available
+   ↓
+Enter
+
+
+============================================================
+26. SYNCHRONIZED METHOD
+============================================================
+
+Example:
+
+public synchronized void increment() {
+
+    count++;
+}
+
+
+Instance synchronized method ka monitor generally:
+
+this object
+
+
+ke monitor se associated hota hai.
+
+
+============================================================
+27. SYNCHRONIZED BLOCK
+============================================================
+
+Pura method synchronize karna zaroori nahi.
+
+Sirf critical section synchronize kar sakte hain.
+
+
+Example:
+
+public void increment() {
+
+    synchronized (this) {
+
+        count++;
+    }
+}
+
+
+Benefit:
+
+Critical section ko narrow rakh sakte hain.
+
+
+Custom lock object:
+
+private final Object lock = new Object();
+
+
+public void increment() {
+
+    synchronized (lock) {
+
+        count++;
+    }
+}
+
+
+============================================================
+28. THREAD SAFETY
+============================================================
+
+Thread-safe code wo hota hai jo multiple threads se concurrent use hone par bhi correct behavior maintain kare.
+
+
+Example:
+
+public synchronized void increment() {
+
+    count++;
+}
+
+
+Thread safety achieve karne ke kuch methods:
+
+- Synchronization
+- Locks
+- Atomic classes
+- Immutable objects
+- Thread-safe collections
+- Proper confinement/design
+
+
+============================================================
+29. volatile
+============================================================
+
+volatile mainly visibility guarantee provide karta hai.
+
+Example:
+
+private volatile boolean running = true;
+
+
+Thread 1:
+
+while (running) {
+
+    // Work
+}
+
+
+Thread 2:
+
+running = false;
+
+
+volatile ke saath Thread 1 ko updated value visible hone ki guarantee milti hai according to Java Memory Model.
+
+
+Example:
+
+class Worker {
+
+    private volatile boolean running = true;
+
+
+    public void work() {
+
+        while (running) {
+
+            // Work
+        }
+    }
+
+
+    public void stop() {
+
+        running = false;
+    }
+}
+
+
+============================================================
+30. volatile VS synchronized
+============================================================
+
+volatile:
+
+- Visibility provide karta hai
+- Simple reads/writes ke ordering/visibility semantics deta hai
+- Mutual exclusion nahi deta
+- Compound operations ko automatically atomic nahi banata
+
+
+synchronized:
+
+- Mutual exclusion provide karta hai
+- Visibility guarantees bhi provide karta hai
+- Critical section ko protect karta hai
+
+
+IMPORTANT:
+
+volatile int count = 0;
+
+count++;
+
+
+Ye still thread-safe nahi hai.
+
+Kyunki count++ atomic operation nahi hai.
+
+
+============================================================
+31. ATOMICITY
+============================================================
+
+Atomic operation wo hota hai jo indivisible operation ki tarah behave karta hai.
+
+Example:
+
+count++;
+
+compound operation hai.
+
+
+Atomic classes:
+
+AtomicInteger
+AtomicLong
+AtomicBoolean
+
+
+Example:
+
+import java.util.concurrent.atomic.AtomicInteger;
+
+
+class Counter {
+
+    private AtomicInteger count =
+            new AtomicInteger(0);
+
+
+    public void increment() {
+
+        count.incrementAndGet();
+    }
+
+
+    public int getCount() {
+
+        return count.get();
+    }
+}
+
+
+Ye simple counter use cases me synchronized ka alternative ho sakta hai.
+
+
+============================================================
+32. DEADLOCK
+============================================================
+
+Deadlock tab hota hai jab threads ek dusre ke resources/locks ka wait karte rehte hain aur progress nahi hoti.
+
+
+Example:
+
+Thread 1:
+
+Lock A acquired
+Waiting for Lock B
+
+
+Thread 2:
+
+Lock B acquired
+Waiting for Lock A
+
+
+Result:
+
+Thread 1 waits for Thread 2
+
+Thread 2 waits for Thread 1
+
+Both wait indefinitely.
+
+
+Diagram:
+
+Thread 1
+   |
+Has Lock A
+   |
+Needs Lock B
+   |
+   ↓
+
+Thread 2
+   |
+Has Lock B
+   |
+Needs Lock A
+
+
+DEADLOCK
+
+
+============================================================
+33. DEADLOCK EXAMPLE
+============================================================
+
+Object lockA = new Object();
+Object lockB = new Object();
+
+
+Thread t1 = new Thread(() -> {
+
+    synchronized (lockA) {
+
+        synchronized (lockB) {
+
+            System.out.println("Task 1");
+        }
+    }
+
+});
+
+
+Thread t2 = new Thread(() -> {
+
+    synchronized (lockB) {
+
+        synchronized (lockA) {
+
+            System.out.println("Task 2");
+        }
+    }
+
+});
+
+
+Potential deadlock:
+
+t1 has lockA
+t2 has lockB
+
+t1 waits for lockB
+t2 waits for lockA
+
+
+============================================================
+34. DEADLOCK PREVENTION
+============================================================
+
+Common practices:
+
+1. Locks same order me acquire karo
+
+Example:
+
+Thread 1:
+
+Lock A
+then
+Lock B
+
+
+Thread 2:
+
+Lock A
+then
+Lock B
+
+
+2. Unnecessary nested locks avoid karo
+
+3. Critical sections small rakho
+
+4. Higher-level concurrency utilities use karo
+
+5. Explicit locks use karte waqt tryLock() jaise mechanisms useful ho sakte hain
+
+
+============================================================
+35. EXECUTORS KYU CHAHIYE?
+============================================================
+
+Har task ke liye manually:
+
+new Thread(task).start();
+
+banana large applications me ideal nahi hota.
+
+
+Problems:
+
+- Bahut zyada threads create ho sakte hain
+- Resource management difficult
+- Thread reuse nahi hota
+- Lifecycle management difficult
+
+
+Solution:
+
+Executor Framework
+
+
+============================================================
+36. ExecutorService
+============================================================
+
+ExecutorService tasks ko manage aur execute karta hai.
+
+
+Example:
+
+ExecutorService executor =
+        Executors.newFixedThreadPool(3);
+
+
+executor.submit(() -> {
+
+    System.out.println(
+            "Task Running"
+    );
+});
+
+
+executor.shutdown();
+
+
+Flow:
+
+Tasks
+   ↓
+ExecutorService
+   ↓
+Thread Pool
+   ↓
+Worker Threads
+
+
+============================================================
+37. THREAD POOL
+============================================================
+
+Thread Pool pre-managed worker threads ka group hota hai jo multiple tasks execute kar sakta hai.
+
+
+Example:
+
+ExecutorService executor =
+        Executors.newFixedThreadPool(3);
+
+
+5 tasks:
+
+Task 1
+Task 2
+Task 3
+Task 4
+Task 5
+
+
+3 worker threads:
+
+pool-1-thread-1
+pool-1-thread-2
+pool-1-thread-3
+
+
+Threads tasks complete karke next tasks execute kar sakte hain.
+
+
+Benefits:
+
+- Thread reuse
+- Better resource control
+- Task management easier
+- Raw thread creation se generally better abstraction
+
+
+============================================================
+38. FIXED THREAD POOL
+============================================================
+
+Example:
+
+ExecutorService executor =
+        Executors.newFixedThreadPool(3);
+
+
+for (int i = 1; i <= 10; i++) {
+
+    int taskId = i;
+
+    executor.submit(() -> {
+
+        System.out.println(
+                "Task "
+                + taskId
+                + " executed by "
+                + Thread.currentThread().getName()
+        );
+    });
+}
+
+
+executor.shutdown();
+
+
+============================================================
+39. shutdown()
+============================================================
+
+executor.shutdown();
+
+
+Meaning:
+
+- New tasks accept nahi karega
+- Already submitted tasks complete hone dega
+
+
+shutdownNow():
+
+Pending/running tasks ko interrupt/cancel karne ki best-effort attempt karta hai.
+
+Guaranteed immediate stop nahi hota.
+
+
+============================================================
+40. awaitTermination()
+============================================================
+
+Executor ke tasks complete hone ka wait karne ke liye:
+
+
+executor.shutdown();
+
+
+executor.awaitTermination(
+        5,
+        TimeUnit.SECONDS
+);
+
+
+Meaning:
+
+Maximum 5 seconds wait karo.
+
+
+============================================================
+41. RUNNABLE VS CALLABLE
+============================================================
+
+RUNNABLE:
+
+public void run()
+
+
+- Result return nahi karta
+- Checked exception directly declare nahi kar sakta in run()
+
+
+CALLABLE:
+
+public V call() throws Exception
+
+
+- Result return kar sakta hai
+- Exception throw kar sakta hai
+
+
+Example:
+
+Callable<Integer> task = () -> {
+
+    return 10 + 20;
+};
+
+
+============================================================
+42. CALLABLE
+============================================================
+
+Example:
+
+Callable<Integer> task = () -> {
+
+    return 100;
+};
+
+
+ExecutorService executor =
+        Executors.newSingleThreadExecutor();
+
+
+Future<Integer> future =
+        executor.submit(task);
+
+
+Integer result =
+        future.get();
+
+
+System.out.println(result);
+
+
+executor.shutdown();
+
+
+============================================================
+43. FUTURE
+============================================================
+
+Future asynchronous computation ka future result represent karta hai.
+
+
+Example:
+
+Future<Integer> future =
+        executor.submit(task);
+
+
+Result:
+
+future.get();
+
+
+Important:
+
+future.get()
+
+result available na hone par current thread ko block kar sakta hai.
+
+
+Useful methods:
+
+future.get()
+
+future.isDone()
+
+future.cancel(true)
+
+future.isCancelled()
+
+
+============================================================
+44. COMPLETABLEFUTURE
+============================================================
+
+CompletableFuture modern asynchronous programming ke liye useful API hai.
+
+Ye asynchronous pipelines aur task composition support karta hai.
+
+
+Example:
+
+CompletableFuture
+        .supplyAsync(() -> "Vijay")
+        .thenApply(name -> "Hello " + name)
+        .thenAccept(System.out::println)
+        .join();
+
+
+Flow:
+
+supplyAsync()
+      ↓
+Value Produce
+      ↓
+thenApply()
+      ↓
+Value Transform
+      ↓
+thenAccept()
+      ↓
+Value Consume
+
+
+============================================================
+45. supplyAsync()
+============================================================
+
+Value return karne wala async task.
+
+
+Example:
+
+CompletableFuture<String> future =
+
+        CompletableFuture.supplyAsync(() -> {
+
+            return "Data";
+        });
+
+
+============================================================
+46. runAsync()
+============================================================
+
+Value return nahi karta.
+
+
+Example:
+
+CompletableFuture<Void> future =
+
+        CompletableFuture.runAsync(() -> {
+
+            System.out.println(
+                    "Task Running"
+            );
+        });
+
+
+============================================================
+47. thenApply()
+============================================================
+
+Result ko transform karta hai.
+
+
+Example:
+
+CompletableFuture
+        .supplyAsync(() -> 10)
+        .thenApply(number -> number * 2);
+
+
+Result:
+
+20
+
+
+============================================================
+48. thenAccept()
+============================================================
+
+Result consume karta hai.
+
+Normally result return nahi karta.
+
+
+Example:
+
+CompletableFuture
+        .supplyAsync(() -> "Vijay")
+        .thenAccept(name -> {
+
+            System.out.println(name);
+        });
+
+
+============================================================
+49. join() IN CompletableFuture
+============================================================
+
+CompletableFuture complete hone ka wait karta hai aur result return kar sakta hai.
+
+
+Example:
+
+String result =
+
+        CompletableFuture
+                .supplyAsync(() -> "Hello")
+                .join();
+
+
+Difference from Future.get():
+
+get()
+    ↓
+Checked exceptions handle/declare karne pad sakte hain
+
+
+join()
+    ↓
+CompletionException jaise unchecked exception wrapping use karta hai
+
+
+============================================================
+50. COMPLETABLEFUTURE EXCEPTION HANDLING
+============================================================
+
+Example:
+
+CompletableFuture
+        .supplyAsync(() -> {
+
+            throw new RuntimeException(
+                    "Error"
+            );
+
+        })
+
+        .exceptionally(ex -> {
+
+            return "Default Value";
+
+        })
+
+        .thenAccept(
+                System.out::println
+        );
+
+
+============================================================
+51. VIRTUAL THREADS
+============================================================
+
+Virtual Threads Java 21 me final feature ke roop me available hain.
+
+Traditional platform threads operating-system threads se closely mapped hote hain.
+
+Virtual threads JVM-managed lightweight threads hain.
+
+
+Useful especially for:
+
+- Large numbers of blocking I/O tasks
+- Network calls
+- Database calls
+- Request-per-task style server workloads
+
+
+Important:
+
+Virtual threads CPU-intensive work ko magically faster nahi banate.
+
+Inka major benefit large-scale blocking/concurrent workloads me hai.
+
+
+============================================================
+52. CREATE VIRTUAL THREAD
+============================================================
+
+Java 21:
+
+
+Thread virtualThread =
+
+        Thread.startVirtualThread(() -> {
+
+            System.out.println(
+                    Thread.currentThread()
+            );
+
+        });
+
+
+virtualThread.join();
+
+
+============================================================
+53. VIRTUAL THREAD BUILDER
+============================================================
+
+Example:
+
+Thread thread =
+
+        Thread.ofVirtual()
+                .name("My-Virtual-Thread")
+                .start(() -> {
+
+                    System.out.println(
+                            "Running"
+                    );
+
+                });
+
+
+thread.join();
+
+
+============================================================
+54. VIRTUAL THREAD PER TASK EXECUTOR
+============================================================
+
+Java 21:
+
+
+try (
+    ExecutorService executor =
+            Executors.newVirtualThreadPerTaskExecutor()
+) {
+
+    for (int i = 1; i <= 1000; i++) {
+
+        int taskId = i;
+
+        executor.submit(() -> {
+
+            Thread.sleep(1000);
+
+            return "Task " + taskId;
+        });
+    }
+}
+
+
+Concept:
+
+Task 1 → Virtual Thread
+
+Task 2 → Virtual Thread
+
+Task 3 → Virtual Thread
+
+...
+
+
+Large number of blocking tasks handle karna practical ho sakta hai.
+
+
+============================================================
+55. PLATFORM THREAD VS VIRTUAL THREAD
+============================================================
+
+PLATFORM THREAD:
+
+- OS thread se closely associated
+- Relatively expensive resource
+- Large numbers costly ho sakte hain
+
+
+VIRTUAL THREAD:
+
+- JVM managed
+- Lightweight
+- Large numbers of blocking tasks ke liye designed
+- Java 21+
+
+
+Use Case:
+
+Platform Thread Pool:
+
+Controlled number of worker threads
+
+
+Virtual Threads:
+
+Potentially one virtual thread per blocking task
+
+
+============================================================
+56. wait(), notify(), notifyAll()
+============================================================
+
+Ye low-level inter-thread communication methods hain.
+
+Ye Object class ke methods hain.
+
+
+wait():
+
+Current thread specified object's monitor ko release karke wait karta hai.
+
+
+notify():
+
+Us monitor par wait kar rahe kisi ek thread ko wake-up eligibility deta hai.
+
+
+notifyAll():
+
+Us monitor par wait kar rahe sab threads ko wake-up eligibility deta hai.
+
+
+IMPORTANT:
+
+wait(), notify(), notifyAll()
+
+ko synchronized context me same monitor ke saath use karna hota hai.
+
+
+Example:
+
+synchronized (lock) {
+
+    lock.wait();
+}
+
+
+Another Thread:
+
+synchronized (lock) {
+
+    lock.notify();
+}
+
+
+Modern applications me higher-level concurrency utilities often preferred hoti hain.
+
+
+============================================================
+57. sleep() VS wait()
+============================================================
+
+sleep():
+
+- Thread class method
+- Current thread ko pause karta hai
+- Held monitor lock automatically release nahi karta
+- Time-based pause commonly used
+
+
+wait():
+
+- Object class method
+- Inter-thread coordination ke liye
+- Monitor lock release karta hai
+- Synchronized context required
+
+
+============================================================
+58. SYNCHRONIZED VS LOCK
+============================================================
+
+synchronized:
+
+Simple built-in locking mechanism.
+
+
+Example:
+
+synchronized (this) {
+
+    // Critical Section
+}
+
+
+Lock API:
+
+More advanced control provide kar sakti hai.
+
+
+Example:
+
+Lock lock =
+        new ReentrantLock();
+
+
+lock.lock();
+
+try {
+
+    // Critical Section
+
+} finally {
+
+    lock.unlock();
+}
+
+
+Benefits of explicit Lock APIs can include:
+
+- tryLock()
+- interruptible lock acquisition
+- timed lock attempts
+- multiple Condition objects
+
+
+============================================================
+59. ReentrantLock
+============================================================
+
+Example:
+
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+
+class Counter {
+
+    private int count = 0;
+
+    private final Lock lock =
+            new ReentrantLock();
+
+
+    public void increment() {
+
+        lock.lock();
+
+        try {
+
+            count++;
+
+        } finally {
+
+            lock.unlock();
+        }
+    }
+}
+
+
+IMPORTANT:
+
+unlock() ko finally block me rakhna chahiye.
+
+
+============================================================
+60. CONCURRENT COLLECTIONS
+============================================================
+
+Normal collections always thread-safe nahi hoti.
+
+
+Example:
+
+ArrayList
+
+HashMap
+
+
+Concurrent alternatives:
+
+ConcurrentHashMap
+
+CopyOnWriteArrayList
+
+BlockingQueue
+
+
+Example:
+
+ConcurrentHashMap<Integer, String> map =
+        new ConcurrentHashMap<>();
+
+
+Useful when multiple threads shared collections access karte hain.
+
+
+============================================================
+61. BlockingQueue
+============================================================
+
+Producer-Consumer problems ke liye useful.
+
+
+Example:
+
+BlockingQueue<Integer> queue =
+        new ArrayBlockingQueue<>(10);
+
+
+Producer:
+
+queue.put(100);
+
+
+Consumer:
+
+int value =
+        queue.take();
+
+
+Queue full:
+
+put() wait kar sakta hai.
+
+
+Queue empty:
+
+take() wait kar sakta hai.
+
+
+Low-level wait()/notify() ke comparison me often easier abstraction.
+
+
+============================================================
+62. DAEMON THREAD
+============================================================
+
+Daemon thread background supporting thread hota hai.
+
+
+Example:
+
+Thread t = new Thread(() -> {
+
+    while (true) {
+
+        System.out.println(
+                "Background Work"
+        );
+    }
+});
+
+
+t.setDaemon(true);
+
+t.start();
+
+
+Important:
+
+JVM generally exit kar sakti hai jab sirf daemon threads remaining hon.
+
+
+Examples of background-style work:
+
+- Monitoring
+- Supporting services
+
+
+============================================================
+63. USER THREAD VS DAEMON THREAD
+============================================================
+
+USER THREAD:
+
+Application ka normal important work.
+
+
+DAEMON THREAD:
+
+Background support work.
+
+
+Example:
+
+t.setDaemon(true);
+
+
+Check:
+
+t.isDaemon();
+
+
+IMPORTANT:
+
+setDaemon(true)
+
+start() se pehle call karna hota hai.
+
+
+============================================================
+64. THREAD PRIORITY
+============================================================
+
+Priority range:
+
+Thread.MIN_PRIORITY = 1
+
+Thread.NORM_PRIORITY = 5
+
+Thread.MAX_PRIORITY = 10
+
+
+Example:
+
+thread.setPriority(
+        Thread.MAX_PRIORITY
+);
+
+
+IMPORTANT:
+
+Priority sirf scheduler hint hai.
+
+Execution order ki guarantee nahi hai.
+
+
+============================================================
+65. COMMON MULTITHREADING PROBLEMS
+============================================================
+
+1. Race Condition
+
+Multiple threads shared data ko unsafe way me modify karte hain.
+
+
+2. Deadlock
+
+Threads ek dusre ke locks ka indefinitely wait karte hain.
+
+
+3. Starvation
+
+Kisi thread ko required CPU/resource/lock access repeatedly nahi milta.
+
+
+4. Livelock
+
+Threads active hote hain but useful progress nahi karte.
+
+
+5. Visibility Problem
+
+Ek thread ka update dusre thread ko timely/guaranteed visible nahi hota without proper synchronization.
+
+
+============================================================
+66. IMPORTANT INTERVIEW QUESTIONS
+============================================================
+
+Q1. Thread kya hai?
+
+Thread process ke andar lightweight execution unit hai.
+
+
+Q2. Process aur Thread me difference?
+
+Process independent running program hai.
+
+Thread process ke andar execution path hai.
+
+
+Q3. start() aur run() me difference?
+
+start() new thread start karta hai.
+
+run() direct call karne par normal method ki tarah current thread me execute hota hai.
+
+
+Q4. Thread create kaise karte hain?
+
+Basic ways:
+
+- Extend Thread
+- Implement Runnable
+
+Modern task execution:
+
+- ExecutorService
+- CompletableFuture
+- Virtual Threads
+
+
+Q5. Runnable better kyu ho sakta hai?
+
+Task ko Thread object se separate karta hai aur class inheritance flexibility maintain karta hai.
+
+
+Q6. sleep() kya karta hai?
+
+Current thread ko specified time ke liye pause karta hai.
+
+
+Q7. join() kya karta hai?
+
+Current thread ko target thread ke completion ka wait karwata hai.
+
+
+Q8. Race condition kya hai?
+
+Jab result multiple threads ke unsafe timing/order par depend karta hai.
+
+
+Q9. synchronized kya karta hai?
+
+Critical section par mutual exclusion aur visibility guarantees provide karta hai.
+
+
+Q10. volatile kya karta hai?
+
+Shared variable ke updates ki visibility guarantee provide karta hai.
+
+
+Q11. volatile count++ ko safe banata hai?
+
+Nahi.
+
+count++ atomic operation nahi hai.
+
+
+Q12. Deadlock kya hai?
+
+Jab threads cyclic lock/resource waiting ki wajah se progress nahi karte.
+
+
+Q13. ExecutorService kya hai?
+
+Tasks aur worker threads ko manage karne ka high-level concurrency framework.
+
+
+Q14. Thread Pool kya hai?
+
+Reusable managed worker threads ka pool.
+
+
+Q15. Runnable aur Callable difference?
+
+Runnable result return nahi karta.
+
+Callable result return kar sakta hai aur checked exception throw kar sakta hai.
+
+
+Q16. Future kya hai?
+
+Asynchronous computation ke future result ko represent karta hai.
+
+
+Q17. CompletableFuture kya hai?
+
+Asynchronous task composition aur pipelines ke liye API.
+
+
+Q18. Virtual Thread kya hai?
+
+JVM-managed lightweight thread, especially large numbers of blocking tasks ke liye useful.
+
+
+Q19. sleep() aur wait() difference?
+
+sleep() monitor lock release nahi karta.
+
+wait() monitor release karta hai aur coordination ke liye use hota hai.
+
+
+Q20. synchronized method aur synchronized block?
+
+Method poore method ke monitor-protected execution ko define karta hai.
+
+Block sirf selected critical section ko protect karta hai.
+
+
+============================================================
+67. PRACTICAL BACKEND EXAMPLE
+============================================================
+
+Imagine Spring Boot server:
+
+User Request 1
+       ↓
+Task
+
+
+User Request 2
+       ↓
+Task
+
+
+User Request 3
+       ↓
+Task
+
+
+Concurrency ka use ho sakta hai:
+
+- HTTP request handling
+- Database calls
+- API calls
+- Email sending
+- File processing
+- Background jobs
+- Async processing
+
+
+Important:
+
+Real backend applications me manually har request ke liye:
+
+new Thread()
+
+banana generally recommended architecture nahi hota.
+
+Frameworks aur executors thread/task management handle karte hain.
+
+
+============================================================
+68. MULTITHREADING LEARNING ORDER
+============================================================
+
+Recommended order:
+
+1. Process and Thread
+
+2. Thread class
+
+3. Runnable
+
+4. start() vs run()
+
+5. Multiple Threads
+
+6. Thread Scheduler
+
+7. sleep()
+
+8. join()
+
+9. Thread Lifecycle
+
+10. interrupt()
+
+11. Shared Resources
+
+12. Race Condition
+
+13. synchronized
+
+14. volatile
+
+15. Atomic Classes
+
+16. Deadlock
+
+17. ExecutorService
+
+18. Thread Pools
+
+19. Callable
+
+20. Future
+
+21. CompletableFuture
+
+22. Virtual Threads
+
+23. Locks
+
+24. Concurrent Collections
+
+
+============================================================
+69. MOST IMPORTANT PRACTICAL CONCEPTS
+============================================================
+
+Java Backend Developer ke liye especially important:
+
+Thread
+
+Runnable
+
+start() vs run()
+
+sleep()
+
+join()
+
+Thread Lifecycle
+
+Race Condition
+
+synchronized
+
+volatile
+
+Deadlock
+
+ExecutorService
+
+Thread Pool
+
+Callable
+
+Future
+
+CompletableFuture
+
+Virtual Threads
+
+Concurrent Collections
+
+
+============================================================
+70. QUICK REVISION
+============================================================
+
+Thread
+    =
+Unit of Execution
+
+
+Multithreading
+    =
+Multiple Threads
+
+
+start()
+    =
+Start New Thread
+
+
+run()
+    =
+Thread Task
+
+
+sleep()
+    =
+Pause Current Thread
+
+
+join()
+    =
+Wait for Another Thread
+
+
+Race Condition
+    =
+Unsafe Shared Data Access
+
+
+synchronized
+    =
+Mutual Exclusion + Visibility
+
+
+volatile
+    =
+Visibility
+
+
+AtomicInteger
+    =
+Atomic Counter Operations
+
+
+Deadlock
+    =
+Threads Waiting for Each Other
+
+
+ExecutorService
+    =
+Task Execution Management
+
+
+Thread Pool
+    =
+Reusable Worker Threads
+
+
+Callable
+    =
+Task That Returns Result
+
+
+Future
+    =
+Future Async Result
+
+
+CompletableFuture
+    =
+Async Pipeline / Composition
+
+
+Virtual Thread
+    =
+Lightweight JVM-Managed Thread
+
+
+============================================================
+71. FINAL CONCEPT MAP
+============================================================
+
+JAVA MULTITHREADING
+
+        |
+        |--- Thread Basics
+        |       |
+        |       |--- Thread
+        |       |--- Runnable
+        |       |--- start()
+        |       |--- run()
+        |
+        |--- Thread Control
+        |       |
+        |       |--- sleep()
+        |       |--- join()
+        |       |--- interrupt()
+        |       |--- Lifecycle
+        |
+        |--- Shared Data
+        |       |
+        |       |--- Race Condition
+        |       |--- synchronized
+        |       |--- volatile
+        |       |--- Atomic Classes
+        |
+        |--- Problems
+        |       |
+        |       |--- Deadlock
+        |       |--- Starvation
+        |       |--- Livelock
+        |
+        |--- High-Level Concurrency
+        |       |
+        |       |--- ExecutorService
+        |       |--- Thread Pool
+        |       |--- Callable
+        |       |--- Future
+        |
+        |--- Async Programming
+        |       |
+        |       |--- CompletableFuture
+        |
+        |--- Modern Java
+                |
+                |--- Virtual Threads
+
+
+============================================================
+72. ONE-LINE SUMMARY
+============================================================
+
+Java Multithreading allows multiple execution paths to make progress concurrently, but shared mutable data introduces problems such as race conditions and deadlocks, which are managed using synchronization and higher-level concurrency utilities such as ExecutorService, atomic classes, concurrent collections, CompletableFuture, and Java 21 Virtual Threads.
+
+
+
+
+VijayBaazar
+│
+├── Multiple HTTP Requests
+│      └── Server-managed concurrency
+│
+├── Order Placement
+│      ├── Save Order
+│      ├── Email
+│      └── Notification
+│
+├── Payment
+│      └── Concurrent webhook/request handling
+│
+├── Inventory
+│      └── Race-condition prevention
+│
+├── Dashboard
+│      └── Independent calls composed concurrently
+│
+└── Background Jobs
+       └── Executor / Scheduler / Workers

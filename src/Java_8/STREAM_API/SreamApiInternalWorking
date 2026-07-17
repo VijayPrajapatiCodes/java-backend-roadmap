@@ -1,0 +1,115 @@
+Stream API Internal Working
+
+Sabse pehle ye code dekho.
+
+oddNum.stream()
+      .filter(num -> num % 2 != 0)
+      .forEach(System.out::println);
+
+Tum dekhte ho sirf 3 methods hain.
+
+Lekin Java ke andar bahut kuch ho raha hota hai.
+
+Step 1
+
+Java ke paas List hai.
+
+List
+
+1 2 3 4 5 6 7 8 9 12 11 13
+
+Ab
+
+oddNum.stream()
+
+likha.
+
+Java internally bolta hai
+
+Collection
+
+↓
+
+Ek Stream Object banao.
+
+Ab data copy nahi hota.
+
+Sirf ek Stream ban jati hai jo List ko read karegi.
+
+Visual
+
+           List
+
+1 2 3 4 5 6 7 8 9 12 11 13
+
+          │
+
+          ▼
+
+      Stream Object
+Step 2
+
+Ab
+
+.filter(num -> num % 2 != 0)
+
+likha.
+
+Kya Java abhi filter kar deta hai?
+
+Answer
+
+NO ❌
+
+Java sirf yaad rakhta hai
+
+Acha...
+
+Baad me jab processing start hogi
+
+Tab Odd Number filter karna hai.
+
+Isko kehte hain
+
+Lazy Evaluation ⭐⭐⭐⭐⭐
+
+Matlab
+
+Abhi kaam mat karo.
+
+Sirf yaad rakho.
+
+Baad me karenge.
+
+Visual
+
+Stream
+
+↓
+
+Filter Rule Save
+
+↓
+
+Execution Pending
+
+Abhi tak
+
+Kuch bhi process nahi hua.
+Step 3
+
+Ab
+
+.forEach(System.out::println)
+
+aaya.
+
+Java bolta hai
+
+Acha...
+
+Ab Final Result chahiye.
+
+Ab execution start karo.
+
+Yahin se Stream chalti hai.

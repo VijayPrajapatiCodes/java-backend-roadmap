@@ -1,0 +1,93 @@
+ Collectors.toMap()
+
+ Ek line me:
+
+ List → Map convert karna ho, to Collectors.toMap() use karte hain.
+
+ Sabse Pehle Problem
+
+ Maan lo tumhare paas Employees ki List hai.
+
+ 101  Rahul
+ 102  Amit
+ 103  Neha
+ 104  Riya
+
+ Ab manager bolta hai:
+
+ "Mujhe List nahi chahiye.
+ Mujhe Employee ID se direct Employee chahiye."
+
+ Agar List rahegi to search karna padega.
+
+ for(Employee e : employees){
+     if(e.getId()==103){
+         return e;
+     }
+ }
+
+ Time lagta hai.
+
+ Lekin agar Map ho
+
+ 101 → Rahul
+ 102 → Amit
+ 103 → Neha
+ 104 → Riya
+
+ To
+
+ map.get(103);
+
+ Bas.
+
+ O(1) lookup.
+
+ Isi liye toMap() bana.
+
+ Real Life Analogy
+
+ School Register
+
+ List
+
+ Roll No    Name
+
+ 1          Rahul
+ 2          Amit
+ 3          Neha
+ 4          Riya
+
+ Principal bolta hai
+
+ "Roll Number batao."
+
+ Teacher ko pura register dekhna padega.
+
+ Lekin agar
+
+ 1 → Rahul
+
+ 2 → Amit
+
+ 3 → Neha
+
+ 4 → Riya
+
+ To direct mil jayega.
+
+ Ye hi toMap() hai.
+
+ Syntax
+ Collectors.toMap(
+     keyMapper,
+     valueMapper
+ )
+
+ Yaad rakhna:
+
+ Key kis se banegi?
+
+ ↓
+
+ Value kya hogi?

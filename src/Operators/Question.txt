@@ -1,0 +1,105 @@
+1. Difference between = and ==
+
+= (Assignment Operator)
+• Used to assign a value to a variable.
+• Does not return true or false.
+
+Example:
+int a = 10;
+
+== (Comparison Operator)
+• Used to compare two values.
+• Returns true or false.
+
+Example:
+System.out.println(a == 10); // true
+
+
+2. Difference between && and &
+
+&& (Logical AND)
+• Short-circuit operator.
+• If the first condition is false, the second condition is not checked.
+
+Example:
+int a = 10;
+System.out.println(a > 20 && a < 15); // false
+
+& (Bitwise AND)
+• Performs bitwise AND operation.
+• With boolean values, both conditions are always evaluated.
+
+Example:
+int x = 5;
+int y = 3;
+System.out.println(x & y);
+
+
+3. Difference between || and |
+
+|| (Logical OR)
+• Short-circuit operator.
+• If the first condition is true, the second condition is not checked.
+
+Example:
+int age = 20;
+System.out.println(age > 18 || age < 10); // true
+
+| (Bitwise OR)
+• Performs bitwise OR operation.
+• With boolean values, both conditions are always evaluated.
+
+Example:
+System.out.println(5 | 3);
+
+4. Difference between ++a and a++
+
+++a (Pre Increment)
+• First increments the value, then uses it.
+
+Example:
+int a = 10;
+System.out.println(++a); // 11
+
+a++ (Post Increment)
+• First uses the value, then increments it.
+
+Example:
+int a = 10;
+System.out.println(a++); // 10
+System.out.println(a);   // 11
+
+
+
+
+
+5. Difference between / and %
+
+/ (Division Operator)
+• Used to divide two numbers.
+• Returns the quotient.
+
+Example:
+System.out.println(10 / 3); // 3
+
+% (Modulus Operator)
+• Returns the remainder after division.
+
+Example:
+System.out.println(10 % 3); // 1
+
+
+=  → Assigns value
+== → Compares values
+
+&& → Logical AND (Short-circuit)
+&  → Bitwise AND
+
+|| → Logical OR (Short-circuit)
+|  → Bitwise OR
+
+++a → Increment first, then use
+a++ → Use first, then increment
+
+/ → Quotient
+% → Remainder

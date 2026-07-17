@@ -1,0 +1,261 @@
+Interview Questions 🔥
+Q1. Maven ke kitne lifecycles hote hain?
+
+✅ 3
+
+Clean
+Default
+Site
+Q2. mvn clean kya karta hai?
+
+✅ target/ folder delete karta hai.
+
+Q3. mvn package kya banata hai?
+
+✅ JAR ya WAR file.
+
+Q4. mvn install kya karta hai?
+
+✅ JAR ko Local Repository (.m2) me install karta hai.
+
+Q5. Agar test fail ho jaye to?
+
+✅ Maven package nahi banayega (default behavior).
+
+🧠 Ab Ek Chhota Test
+
+Batao:
+
+Agar tum command chalao:
+mvn package
+
+
+
+
+
+
+Real Industry Example
+
+Maan lo tumhari company ka naam hai VijayBaazar.
+
+Uske 4 alag Maven projects hain.
+
+groupId	artifactId	version
+com.vijaybaazar	user-service	1.0.0
+com.vijaybaazar	payment-service	2.0.0
+com.vijaybaazar	order-service	1.5.0
+com.vijaybaazar	cart-service	1.2.0
+
+Dhyan do:
+
+groupId same hai (company same hai).
+artifactId alag hai (har project/service alag hai).
+version bhi alag ho sakta hai, kyunki har service independently update hoti hai.
+
+
+
+
+
+
+# Maven Architecture & Internal Working
+
+## Maven Architecture
+
+```text
+                👨‍💻 Developer
+                     │
+                     ▼
+                  pom.xml
+                     │
+                     ▼
+                Maven Engine
+                     │
+        ┌────────────┴────────────┐
+        ▼                         ▼
+ Local Repository          Central Repository
+(.m2 folder in PC)        (Internet Server)
+        │                         │
+        └────────────┬────────────┘
+                     ▼
+                 Java Project
+```
+
+---
+
+# Step 1 — Developer
+
+Developer sirf project ki information aur required dependencies `pom.xml` me likhta hai.
+
+Example:
+
+```xml
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.38</version>
+</dependency>
+```
+
+Developer ko manually JAR download karne ki zarurat nahi hoti.
+
+---
+
+# Step 2 — pom.xml
+
+`pom.xml` ka full form hai:
+
+**Project Object Model**
+
+Ye Maven project ki blueprint file hoti hai.
+
+Isme project ki important information hoti hai:
+
+* Project Name
+* Version
+* Java Version
+* Dependencies
+* Plugins
+* Build Configuration
+
+Maven isi file ko padhkar project ko build karta hai.
+
+---
+
+# Step 3 — Maven Engine
+
+Jab project build ya reload hota hai, Maven sabse pehle `pom.xml` ko read karta hai.
+
+Phir check karta hai:
+
+> "Kya required dependency Local Repository (`.m2`) me already available hai?"
+
+Agar **Yes**, to wahi dependency use kar leta hai.
+
+Agar **No**, to Maven Central Repository par request bhejta hai.
+
+---
+
+# Step 4 — Local Repository (.m2)
+
+Default Windows Location:
+
+```text
+C:\Users\<Username>\.m2\repository
+```
+
+Ye Maven ka local storage hai.
+
+Example:
+
+```text
+.m2
+└── repository
+    ├── mysql
+    ├── springframework
+    ├── lombok
+    ├── junit
+    └── jackson
+```
+
+Ek baar dependency download ho jaye to future me isi folder se use hoti hai.
+
+---
+
+# Step 5 — Central Repository
+
+Agar dependency Local Repository me nahi milti, to Maven internet par available **Maven Central Repository** se us dependency ko download karta hai.
+
+Flow:
+
+```text
+Developer
+    ↓
+pom.xml
+    ↓
+Maven Engine
+    ↓
+Local Repository (.m2)
+    ↓
+Not Found
+    ↓
+Maven Central Repository
+    ↓
+Download
+    ↓
+Save in .m2
+    ↓
+Project Ready
+```
+
+---
+
+# Real Life Analogy
+
+Socho tumhare ghar me ek Store Room hai.
+
+* **Store Room** = Local Repository (.m2)
+* **Market** = Maven Central Repository
+
+Agar samaan ghar me mil gaya, to market nahi jaoge.
+
+Agar ghar me nahi mila, tab market jaakar lekar aaoge.
+
+Maven bhi exactly isi tarah kaam karta hai.
+
+---
+
+# Repository Types
+
+## 1. Local Repository
+
+* User ke computer me hota hai.
+* Downloaded dependencies yahin store hoti hain.
+
+## 2. Central Repository
+
+* Maven ki official online repository.
+* Internet se dependencies download hoti hain.
+
+## 3. Remote Repository
+
+* Company ya organization ki private repository.
+* Enterprise projects me use hoti hai.
+
+---
+
+# Interview Questions
+
+### Q1. Maven sabse pehle dependency kahan search karta hai?
+
+**Answer:** Local Repository (`.m2`)
+
+---
+
+### Q2. Agar dependency Local Repository me na mile to?
+
+**Answer:** Maven Central Repository se download karta hai.
+
+---
+
+### Q3. Download hone ke baad dependency kahan save hoti hai?
+
+**Answer:** `.m2/repository`
+
+---
+
+### Q4. `pom.xml` ka full form kya hai?
+
+**Answer:** Project Object Model
+
+---
+
+# Quick Revision
+
+```text
+✔ Developer sirf pom.xml edit karta hai.
+✔ Maven pom.xml read karta hai.
+✔ Pehle Local Repository (.m2) check hoti hai.
+✔ Dependency na mile to Central Repository se download hoti hai.
+✔ Download hone ke baad .m2 me save ho jati hai.
+✔ Same dependency future projects me dobara download nahi hoti.
+```

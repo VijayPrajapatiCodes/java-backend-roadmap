@@ -1,0 +1,18 @@
+public record Student(
+        int id,
+        String name
+){}
+
+Bas.
+
+Java automatically banata hai
+
+✅ Constructor
+
+✅ Getter
+
+✅ equals()
+
+✅ hashCode()
+
+✅ toString()

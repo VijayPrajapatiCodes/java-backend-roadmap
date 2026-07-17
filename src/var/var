@@ -1,0 +1,59 @@
+var (Java 10)
+
+Java khud datatype identify karta hai.
+
+Purana
+
+String name = "Rahul";
+
+Modern
+
+var name = "Rahul";
+
+Compiler samajh gaya
+
+name
+
+↓
+
+String
+
+Example
+
+var age = 22;
+
+var salary = 25000.50;
+
+var list = List.of(1,2,3);
+
+Compiler
+
+age
+
+↓
+
+int
+
+salary
+
+↓
+
+double
+
+list
+
+↓
+
+List<Integer>
+Invalid
+var x;
+
+❌
+
+Initialization zaruri hai.
+
+Best Practice
+
+✅ Local Variables
+
+❌ Class Variables

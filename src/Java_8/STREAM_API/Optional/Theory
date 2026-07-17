@@ -1,0 +1,70 @@
+Optional<T>
+
+Agar Stream API ka heart filter() hai, to Modern Java ka safety feature Optional hai.
+
+Spring Boot me bhi Optional har jagah milega.
+
+Example:
+
+userRepository.findById(1);
+
+Ye return karta hai:
+
+Optional<User>
+
+Isliye Optional ko deeply samajhna bahut zaroori hai.
+
+1. Optional Kya Hai?
+
+Simple definition:
+
+Optional ek container (box) hai jisme value ho bhi sakti hai aur nahi bhi.
+
+Visual
+
+Normal Variable
+
+String name = "Vijay"
+
+──────────────
+
+Optional
+
+┌──────────────┐
+│   "Vijay"    │
+└──────────────┘
+
+Ya
+
+┌──────────────┐
+│   Empty      │
+└──────────────┘
+Real Life Example
+
+Socho tumne Amazon se parcel order kiya.
+
+Kabhi parcel hota hai.
+
+Kabhi delivery cancel ho jati hai.
+
+Matlab
+
+Parcel
+
+↓
+
+Ho bhi sakta hai
+
+Nahi bhi ho sakta
+
+Java me bhi
+
+User
+
+Database me
+
+Mil bhi sakta hai
+
+Nahi bhi mil sakta
+
+Isi problem ke liye Optional bana.

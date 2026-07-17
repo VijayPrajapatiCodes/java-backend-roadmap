@@ -1,0 +1,19 @@
+Collection Kya Hai?
+Interview Definition
+
+Collection is a framework that provides classes and interfaces to store and manipulate a group of objects.
+
+Hindi me
+
+Collection ek Framework hai jo multiple objects ko store aur manage karne ke liye classes aur interfaces provide karta hai.
+
+
+
+
+
+⭐ Summary
+Collection	Important Point
+List	Ordered + Duplicate Allowed
+Set	Unique Elements
+Queue	FIFO
+Map	Key-Value Pair

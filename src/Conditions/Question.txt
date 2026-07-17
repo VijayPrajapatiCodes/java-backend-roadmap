@@ -1,0 +1,43 @@
+Q1. What is a conditional statement?
+
+Answer:
+A conditional statement is used to execute different blocks of code based on a condition.
+
+Q2. Which conditional statements are available in Java?
+
+Answer:
+1. if
+2. if-else
+3. else-if
+4. Nested if
+5. switch
+6. Ternary Operator
+
+Q3. Difference between if and switch?
+
+Answer:
+
+if
+• Used for ranges and complex conditions.
+• Supports relational operators.
+
+switch
+• Used for fixed values.
+• Cleaner for multiple constant cases.
+
+
+
+Q4. What is Nested if?
+
+Answer:
+A Nested if is an if statement inside another if statement.
+
+
+Q5. What is Ternary Operator?
+
+Answer:
+The ternary operator is a shortcut for if-else.
+
+Syntax:
+condition ? trueValue : falseValue;
+

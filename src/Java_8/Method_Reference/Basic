@@ -1,0 +1,24 @@
+Jab Lambda Expression sirf kisi existing method ko call kar rahi ho, tab hum Lambda ki jagah Method Reference :: use kar sakte hain.
+
+1. Static Method
+   ClassName::methodName
+
+   Math::sqrt
+
+
+2. Particular Object ka Instance Method
+   object::methodName
+
+   System.out::println
+
+
+3. Type ka Instance Method
+   ClassName::instanceMethod
+
+   String::toUpperCase
+
+
+4. Constructor Reference
+   ClassName::new
+
+   User::new

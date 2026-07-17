@@ -1,0 +1,36 @@
+reduce() Kya Hai?
+
+Simple definition:
+
+Stream ke saare elements ko combine karke ek hi final value banana.
+
+Visual:
+
+1 2 3 4 5
+      ↓
+reduce()
+      ↓
+15
+
+Yahan:
+
+Input = 5 elements
+Output = 1 element
+Real Life Example
+
+Tumhare paas shopping bill hai.
+
+100
+200
+300
+400
+
+Final Bill kitna hua?
+
+100 + 200 + 300 + 400
+
+↓
+
+1000
+
+Yehi reduce hai.

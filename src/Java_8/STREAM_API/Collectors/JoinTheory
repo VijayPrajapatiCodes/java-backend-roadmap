@@ -1,0 +1,76 @@
+Collectors.joining()
+Ek Line Definition
+
+joining() Stream ke saare String elements ko jod (join) deta hai aur ek hi String return karta hai.
+
+Matlab
+
+Rahul
+Amit
+Neha
+Riya
+
+ban jayega
+
+RahulAmitNehaRiya
+
+Ya
+
+Rahul, Amit, Neha, Riya
+
+Ya
+
+[Rahul, Amit, Neha, Riya]
+
+Sab joining() se possible hai.
+
+Problem
+
+Maan lo List hai
+
+List<String> names = List.of(
+        "Rahul",
+        "Amit",
+        "Neha",
+        "Riya"
+);
+
+Output chahiye
+
+Rahul, Amit, Neha, Riya
+
+Purane Java me
+
+String result = "";
+
+for(String name : names){
+
+    result += name + ", ";
+
+}
+
+Problems ❌
+
+Slow
+Extra comma
+Ugly code
+String immutable hai
+
+Java 8 ne bola
+
+"Main kar deta hu."
+
+Solution
+String result = names.stream()
+
+.collect(Collectors.joining());
+
+System.out.println(result);
+
+Output
+
+RahulAmitNehaRiya
+
+Notice
+
+Beech me space nahi hai.

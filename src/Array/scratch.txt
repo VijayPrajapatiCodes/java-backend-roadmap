@@ -1,0 +1,88 @@
+Array Kya Hota Hai?
+
+Definition (Interview):
+
+Array is a collection of similar type of elements stored in contiguous memory locations.
+
+Hindi me:
+
+Array ek hi data type ke multiple values ko ek hi variable me store karta hai.
+
+
+int sum = 0;
+
+for(int i = 0; i < arr.length; i++) {
+    sum = sum + arr[i];
+}
+
+
+
+double average = (double) sum / arr.length;
+
+
+Maximum
+int max = arr[0];
+
+for(int i = 1; i < arr.length; i++) {
+
+    if(arr[i] > max) {
+        max = arr[i];
+    }
+
+}
+
+
+Minimum Number
+int min = arr[0];
+
+for(int i = 1; i < arr.length; i++) {
+
+    if(arr[i] < min) {
+        min = arr[i];
+    }
+
+}
+
+
+
+Even Sum
+int sum = 0;
+
+for(int i = 0; i < arr.length; i++) {
+
+    if(arr[i] % 2 == 0) {
+        sum = sum + arr[i];
+    }
+
+}
+
+
+Odd Sum
+
+int sum = 0;
+
+for(int i = 0; i < arr.length; i++) {
+
+    if(arr[i] % 2 != 0) {
+        sum = sum + arr[i];
+    }
+
+}
+
+
+Even/Odd Count
+int evenCount = 0;
+int oddCount = 0;
+
+for(int i = 0; i < arr.length; i++) {
+
+    if(arr[i] % 2 == 0) {
+        evenCount++;
+    } else {
+        oddCount++;
+    }
+
+}
+
+
+

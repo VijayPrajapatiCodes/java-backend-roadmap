@@ -1,0 +1,34 @@
+Interview Questions
+
+Q. groupingBy() kya return karta hai?
+
+Ans: Default me Map<K, List<T>>.
+
+Q. Kya key kisi property se banti hai?
+
+Ans: Haan, classifier function (jaise Student::getDepartment) se.
+
+Q. Kya custom collector ke saath use kar sakte hain?
+
+Ans: Haan. Jaise:
+
+Collectors.groupingBy(
+    Student::getDepartment,
+    Collectors.counting()
+)
+
+Isse har department me kitne students hain, woh milega.
+
+Common Mistakes
+
+❌ Sochna ki groupingBy() list ko sort karta hai.
+
+➡️ Nahi, ye sirf group banata hai.
+
+❌ Sochna ki output List hota hai.
+
+➡️ Output Map hota hai.
+
+❌ Mutable objects ko group karne ke baad unhe bina soche modify karna.
+
+➡️ Agar grouped data share ho raha ho to unexpected behavior aa sakta hai.

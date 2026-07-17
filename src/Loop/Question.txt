@@ -1,0 +1,495 @@
+
+Iteration Kya Hota Hai?
+
+Definition:
+
+Loop ka ek complete chakkar (one complete cycle) ko iteration kehte hain.
+==========================
+i++ (Post Increment) vs ++i (Pre Increment)
+==========================
+
+Ye Java ka bahut important interview question hai.
+
+------------------------------------------
+1. i++ (Post Increment)
+------------------------------------------
+
+Rule:
+👉 Pehle current value use hoti hai, uske baad increment hota hai.
+
+Example:
+
+```java
+int a = 5;
+
+System.out.println(a++);
+```
+
+Step by Step:
+
+```
+Initially
+
+a = 5
+
+↓
+
+System.out.println(a++)
+
+↓
+
+Step 1:
+Current value print hogi
+
+Output = 5
+
+↓
+
+Step 2:
+Print hone ke baad increment hoga
+
+a = a + 1
+
+a = 6
+```
+
+Output:
+
+```
+5
+```
+
+Ab agar dubara print kare:
+
+```java
+System.out.println(a);
+```
+
+Output:
+
+```
+6
+```
+
+Memory Visualization:
+
+```
+Initially
+
+a = 5
+
+↓
+
+Print hua
+
+5
+
+↓
+
+Increment hua
+
+a = 6
+```
+
+------------------------------------------
+2. ++i (Pre Increment)
+------------------------------------------
+
+Rule:
+👉 Pehle increment hota hai, uske baad value use hoti hai.
+
+Example:
+
+```java
+int a = 5;
+
+System.out.println(++a);
+```
+
+Step by Step:
+
+```
+Initially
+
+a = 5
+
+↓
+
+++a
+
+↓
+
+Step 1:
+Pehle increment
+
+a = 6
+
+↓
+
+Step 2:
+Ab print hoga
+
+6
+```
+
+Output:
+
+```
+6
+```
+
+Ab agar dubara print kare:
+
+```java
+System.out.println(a);
+```
+
+Output:
+
+```
+6
+```
+
+Memory Visualization:
+
+```
+Initially
+
+a = 5
+
+↓
+
+Increment hua
+
+a = 6
+
+↓
+
+Print hua
+
+6
+```
+
+------------------------------------------
+3. i++ aur ++i me Difference
+------------------------------------------
+
+| i++ (Post Increment)           | ++i (Pre Increment)          |
+|--------------------------------|------------------------------|
+| Pehle value use hoti hai       | Pehle increment hota hai     |
+| Baad me increment hota hai     | Pehle increment hota hai     |
+| Output purani value deta hai   | Output nayi value deta hai   |
+
+------------------------------------------
+4. Sabse Achha Example
+------------------------------------------
+
+```java
+public class Main {
+
+    public static void main(String[] args) {
+
+        int a = 5;
+
+        System.out.println(a++);
+        System.out.println(a);
+
+        int b = 5;
+
+        System.out.println(++b);
+        System.out.println(b);
+
+    }
+}
+```
+
+Output:
+
+```
+5
+6
+6
+6
+```
+
+Step by Step:
+
+```
+a = 5
+
+↓
+
+Print(a++)
+
+Output = 5
+
+↓
+
+a increment hua
+
+a = 6
+
+↓
+
+Print(a)
+
+Output = 6
+
+--------------------------------
+
+b = 5
+
+↓
+
+++b
+
+↓
+
+Pehle increment
+
+b = 6
+
+↓
+
+Print
+
+Output = 6
+
+↓
+
+Print(b)
+
+Output = 6
+```
+
+------------------------------------------
+5. Assignment me Difference
+------------------------------------------
+
+Post Increment
+
+```java
+int a = 5;
+
+int b = a++;
+
+System.out.println(a);
+System.out.println(b);
+```
+
+Step by Step
+
+```
+Initially
+
+a = 5
+
+↓
+
+b = a
+
+b = 5
+
+↓
+
+Increment hua
+
+a = 6
+```
+
+Output
+
+```
+a = 6
+b = 5
+```
+
+------------------------------------------
+
+Pre Increment
+
+```java
+int a = 5;
+
+int b = ++a;
+
+System.out.println(a);
+System.out.println(b);
+```
+
+Step by Step
+
+```
+Initially
+
+a = 5
+
+↓
+
+Pehle increment
+
+a = 6
+
+↓
+
+b = a
+
+b = 6
+```
+
+Output
+
+```
+a = 6
+b = 6
+```
+
+------------------------------------------
+6. Interview Trick Question
+------------------------------------------
+
+```java
+int a = 5;
+
+System.out.println(a++ + ++a);
+```
+
+Step by Step
+
+```
+Initially
+
+a = 5
+
+↓
+
+a++
+
+Current value use hogi
+
+5
+
+↓
+
+Increment
+
+a = 6
+
+↓
+
+++a
+
+Pehle increment
+
+a = 7
+
+↓
+
+Current value
+
+7
+
+↓
+
+Total
+
+5 + 7
+
+=
+
+12
+```
+
+Output
+
+```
+12
+```
+
+Final Value
+
+```
+a = 7
+```
+
+------------------------------------------
+7. for Loop me i++ aur ++i Same Kyu Hote Hain?
+------------------------------------------
+
+Example 1
+
+```java
+for(int i = 1; i <= 5; i++)
+{
+    System.out.println(i);
+}
+```
+
+Example 2
+
+```java
+for(int i = 1; i <= 5; ++i)
+{
+    System.out.println(i);
+}
+```
+
+Output
+
+```
+1
+2
+3
+4
+5
+```
+
+Dono ka output bilkul same hoga.
+
+Reason:
+
+for loop ke third part me sirf variable ko increment kiya jata hai.
+
+```java
+i++;
+```
+
+Aur
+
+```java
+++i;
+```
+
+Dono ka matlab hota hai
+
+```java
+i = i + 1;
+```
+
+Java wahan expression ki returned value use nahi karta.
+
+Isliye
+
+```
+i++
+```
+
+aur
+
+```
+++i
+```
+
+Practical me same result dete hain.
+
+------------------------------------------
+8. Interview Line (Yaad Rakhna)
+------------------------------------------
+
+✅ i++ (Post Increment)
+→ Pehle current value use hoti hai, baad me increment hota hai.
+
+✅ ++i (Pre Increment)
+→ Pehle increment hota hai, uske baad updated value use hoti hai.
+
+✅ for loop ke increment part me i++ aur ++i dono same behave karte hain, kyunki Java sirf variable ko increment karta hai; expression ki value use nahi karta.

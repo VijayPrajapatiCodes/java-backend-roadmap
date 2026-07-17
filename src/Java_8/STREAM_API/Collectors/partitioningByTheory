@@ -1,0 +1,110 @@
+Kab Use Kare?
+
+Agar condition
+
+Yes / No
+
+Male / Female
+
+Pass / Fail
+
+Active / Inactive
+
+Paid / Unpaid
+
+Admin / Non Admin
+
+
+Collectors.partitioningBy()
+
+Ek line me:
+partitioningBy() data ko sirf 2 groups me divide karta hai:
+
+true ✅ aur false ❌
+
+Sabse Pehle Problem
+
+Maan lo school me 10 students hain.
+
+Teacher ne bola
+
+Pass Students
+Fail Students
+
+Bas.
+
+Teacher ne ye nahi bola
+
+Java
+Python
+C++
+React
+Spring
+
+Sirf
+
+Pass
+
+Fail
+
+Matlab sirf 2 groups
+
+Isi situation ke liye Java ne banaya
+
+Collectors.partitioningBy()
+Real Life Analogy
+
+Hospital
+
+Patients aaye.
+
+Doctor ne bola
+
+Covid Positive
+
+Covid Negative
+
+Sirf 2 groups.
+
+Naa 3
+
+Naa 4
+
+Naa 10
+
+Sirf
+
+true
+
+false
+
+Yahi partitioning hai.
+
+Syntax
+Collectors.partitioningBy(condition)
+
+Example
+
+Collectors.partitioningBy(student -> student.getMarks() >= 40)
+
+Yaha condition return karti hai
+
+true
+
+ya
+
+false
+
+Output
+
+Map<Boolean,List<Student>>
+
+Notice
+
+groupingBy()
+
+Map<String,List<Student>>
+
+partitioningBy()
+
+Map<Boolean,List<Student>>

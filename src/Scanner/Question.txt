@@ -1,0 +1,166 @@
+Q1. What is Scanner Class?
+
+Answer:
+Scanner is a predefined class in the java.util package that is used to take input from the user at runtime.
+
+Q2. Which package contains Scanner class?
+
+Answer:
+The Scanner class belongs to the java.util package.
+
+Syntax:
+import java.util.Scanner;
+
+Q3. Why do we use System.in?
+
+Answer:
+System.in is a standard input stream used to read input from the keyboard.
+
+
+Q4. Why do we create Scanner object?
+
+Answer:
+Scanner is a class, so we create an object to use its methods.
+
+Example:
+Scanner sc = new Scanner(System.in);
+
+
+Q5. Difference between next() and nextLine()?
+
+Answer:
+
+next()
+• Reads only one word.
+• Stops reading at space.
+
+nextLine()
+• Reads the complete line including spaces.
+
+Q6. Why doesn't nextLine() work after nextInt()?
+
+Answer:
+nextInt() leaves the newline character (\n) in the input buffer.
+The nextLine() method reads that newline immediately.
+
+Solution:
+Use an extra sc.nextLine() before reading the String.
+
+Q7. What is the use of nextInt()?
+
+Answer:
+nextInt() is used to read an integer value from the user.
+
+Q8. What is the use of nextDouble()?
+
+Answer:
+nextDouble() is used to read a double value from the user.
+
+Q9. What is the use of nextFloat()?
+
+Answer:
+nextFloat() is used to read a float value from the user.
+
+
+Q10. What is the use of nextBoolean()?
+
+Answer:
+nextBoolean() is used to read a boolean value (true or false).
+
+Q11. How do you take character input using Scanner?
+
+Answer:
+Scanner has no nextChar() method.
+
+Syntax:
+char ch = sc.next().charAt(0);
+
+Q12. Why do we use sc.close()?
+
+Answer:
+sc.close() is used to close the Scanner object and release system resources.
+
+
+Q13. What is InputMismatchException?
+
+Answer:
+InputMismatchException occurs when the user enters a value of the wrong data type.
+
+Example:
+If nextInt() is used but the user enters "abc", InputMismatchException will occur.
+
+
+Q14. Difference between print() and println()?
+
+Answer:
+
+print()
+• Prints output on the same line.
+
+println()
+• Prints output and moves the cursor to the next line.
+
+
+Q15. Can Scanner read multiple data types?
+
+Answer:
+Yes.
+
+Scanner provides methods like:
+nextInt()
+nextDouble()
+nextFloat()
+nextLong()
+nextShort()
+nextByte()
+nextBoolean()
+next()
+nextLine()
+
+
+Q16. What is the syntax for creating Scanner object?
+
+Answer:
+
+Scanner sc = new Scanner(System.in);
+
+
+Q17. What happens if Scanner is not imported?
+
+Answer:
+The program will give a compile-time error because Scanner belongs to the java.util package.
+
+
+Q18. What is the difference between nextInt() and Integer.parseInt()?
+
+Answer:
+
+nextInt()
+• Reads an integer directly from input.
+
+Integer.parseInt()
+• Converts a String into an integer.
+
+
+Q19. Can Scanner take String input?
+
+Answer:
+Yes.
+
+Methods:
+next()      → Reads one word.
+nextLine()  → Reads the complete line.
+
+
+Q20. Which Scanner methods are most commonly used?
+
+Answer:
+
+nextInt()
+nextDouble()
+nextFloat()
+nextLong()
+nextBoolean()
+next()
+nextLine()
+

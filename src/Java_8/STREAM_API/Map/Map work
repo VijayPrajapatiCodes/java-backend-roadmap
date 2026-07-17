@@ -1,0 +1,61 @@
+Agar filter() = Select hai, to map() = Transform hai.
+
+Aur yaad hai humne pehle Function<T, R> padha tha? Ab uska real use dekhoge.
+
+⭐ map() — Data Transform Karna
+Definition
+
+map() har element ko ek naye form me convert (transform) karta hai.
+
+Simple language me:
+
+Input Data
+     ↓
+map()
+     ↓
+Modified Data
+Real Life Example
+
+Maan lo tumhare paas marks hain.
+
+10
+20
+30
+40
+
+Teacher bolta hai:
+
+Har student ko 5 grace marks de do.
+
+Result:
+
+15
+25
+35
+45
+
+Original data:
+
+10 20 30 40
+
+New data:
+
+15 25 35 45
+
+Ye filter nahi hai.
+
+Yahan koi element remove nahi hua.
+
+Sirf value change hui.
+
+Isi ko bolte hain
+
+Transformation
+Syntax
+stream.map(Function)
+
+Yaad hai?
+
+Function<T,R>
+
+map() ke andar Function lagta hai.

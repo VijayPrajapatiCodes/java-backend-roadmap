@@ -1,0 +1,304 @@
+Sabse Important Internal Flow ⭐⭐⭐⭐⭐
+
+Log sochte hain
+
+Pehle Filter
+
+Fir Print
+
+Lekin Java internally aisa nahi karti.
+
+Java ek-ek element process karti hai.
+
+First Element
+1
+
+Java
+
+↓
+
+Filter
+
+1 % 2 != 0
+
+TRUE
+
+↓
+
+Immediately
+
+println(1)
+
+Ho gaya.
+
+Second Element
+
+2
+
+↓
+
+Filter
+
+2 % 2 != 0
+
+FALSE
+
+↓
+
+Discard
+
+↓
+
+Print nahi.
+
+Third Element
+
+3
+
+↓
+
+Filter
+
+↓
+
+TRUE
+
+↓
+
+Print
+
+Isi tarah
+
+1
+
+↓
+
+Filter
+
+↓
+
+Print
+
+----------------
+
+2
+
+↓
+
+Filter
+
+↓
+
+Reject
+
+----------------
+
+3
+
+↓
+
+Filter
+
+↓
+
+Print
+
+----------------
+
+4
+
+↓
+
+Reject
+
+----------------
+
+5
+
+↓
+
+Print
+
+Ye process last element tak chalta hai.
+
+Isko bolte hain
+Pipeline Processing ⭐⭐⭐⭐⭐
+
+Har element pipeline se pass hota hai.
+
+Visual
+
+      Element
+
+         │
+
+         ▼
+
+     filter()
+
+         │
+
+         ▼
+
+    forEach()
+
+         │
+
+         ▼
+
+      Console
+
+Fir next element
+
+      Element
+
+         │
+
+         ▼
+
+     filter()
+
+         │
+
+         ▼
+
+    forEach()
+
+Isi tarah poori List.
+
+Agar map() bhi laga den
+oddNum.stream()
+
+.filter(num -> num % 2 != 0)
+
+.map(num -> num * 10)
+
+.forEach(System.out::println);
+
+Ab pipeline aur interesting ho jati hai.
+
+Element
+
+1
+
+↓
+
+Filter
+
+↓
+
+Pass
+
+↓
+
+Map
+
+↓
+
+10
+
+↓
+
+Print
+
+Second Element
+
+2
+
+↓
+
+Filter
+
+↓
+
+Reject
+
+↓
+
+Map nahi chalega.
+
+↓
+
+Print bhi nahi.
+
+Third
+
+3
+
+↓
+
+Filter
+
+↓
+
+Pass
+
+↓
+
+Map
+
+↓
+
+30
+
+↓
+
+Print
+
+Visual
+
+1
+
+↓
+
+Filter
+
+↓
+
+Map
+
+↓
+
+Print
+
+----------------
+
+2
+
+↓
+
+Filter
+
+↓
+
+Reject
+
+----------------
+
+3
+
+↓
+
+Filter
+
+↓
+
+Map
+
+↓
+
+Print
+
+Dhyan do
+
+Java
+
+Pehle sab filter
+
+Fir sab map
+
+Fir sab print
+
+aisa nahi karti.
+
+Ye bahut bada interview point hai.

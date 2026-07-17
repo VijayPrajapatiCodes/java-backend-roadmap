@@ -1,0 +1,77 @@
+java.time
+│
+├── LocalDate          → Sirf Date
+├── LocalTime          → Sirf Time
+├── LocalDateTime      → Date + Time
+├── Period             → Date Difference
+├── Duration           → Time Difference
+├── DateTimeFormatter  → Formatting
+├── ZonedDateTime      → Time Zone
+└── Instant            → UTC Time
+
+Java Date & Time API
+Pehle Problem Kya Thi?
+
+Java 8 se pehle hum use karte the:
+
+Date
+Calendar
+SimpleDateFormat
+
+Inme problems thi:
+
+😵 Difficult API
+❌ Mutable (value change ho sakti thi)
+❌ Thread-safe nahi thi
+❌ Date calculations mushkil the
+
+Isliye Java 8 me ek naya package introduce hua:
+java.time
+
+
+Interview Questions ⭐⭐⭐⭐⭐
+Q1. Java 8 se pehle kaunsi classes use hoti thi?
+
+Answer
+
+Date
+Calendar
+SimpleDateFormat
+Q2. LocalDate.now() kya return karta hai?
+
+Answer
+
+Current Date
+Q3. LocalTime.now() kya return karta hai?
+
+Answer
+
+Current Time
+Q4. LocalDateTime.now() kya return karta hai?
+
+Answer
+
+Current Date + Current Time
+Q5. LocalDate immutable hai?
+
+Answer
+
+Yes
+Practice Questions 🔥
+Q1
+
+Current date print karo.
+
+LocalDate.now();
+Q2
+
+Apni birth date banao using:
+
+LocalDate.of(...)
+Q3
+
+Current date me 30 days add karke print karo.
+
+Hint:
+
+plusDays(30)

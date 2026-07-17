@@ -1,0 +1,1325 @@
+=========================================
+Java String Methods (Interview Notes)
+=========================================
+
+Aaj hum Java ke sabse important String methods padhenge.
+
+Topics:
+
+1. == vs equals()
+2. equalsIgnoreCase()
+3. toUpperCase()
+4. toLowerCase()
+5. contains()
+6. startsWith()
+7. endsWith()
+8. substring()
+9. replace()
+10. split()
+
+==================================================
+1. == vs equals() ⭐⭐⭐⭐⭐ (Most Important Interview Question)
+==================================================
+
+Q. == Kya Check Karta Hai?
+
+Answer:
+
+== reference (memory address) compare karta hai.
+
+Q. equals() Kya Check Karta Hai?
+
+Answer:
+
+equals() actual string value compare karta hai.
+
+------------------------------------------
+
+Example 1
+
+```java
+String s1 = "Java";
+String s2 = "Java";
+
+System.out.println(s1 == s2);
+System.out.println(s1.equals(s2));
+```
+
+Output
+
+```
+true
+true
+```
+
+------------------------------------------
+
+Example 2
+
+```java
+String s1 = new String("Java");
+String s2 = new String("Java");
+
+System.out.println(s1 == s2);
+System.out.println(s1.equals(s2));
+```
+
+Output
+
+```
+false
+true
+```
+
+------------------------------------------
+
+Memory
+
+```
+s1 ------> Java
+
+s2 ------> Java
+```
+
+Dono alag objects hain.
+
+Isliye
+
+```java
+s1 == s2
+```
+
+Output
+
+```
+false
+```
+
+Kyuki reference alag hai.
+
+Lekin
+
+```java
+s1.equals(s2);
+```
+
+Output
+
+```
+true
+```
+
+Kyuki value same hai.
+
+------------------------------------------
+
+Interview Line
+
+```
+== compares memory address (reference).
+
+equals() compares actual string value.
+```
+
+==================================================
+2. equalsIgnoreCase()
+==================================================
+
+Uppercase aur lowercase ignore karta hai.
+
+Example
+
+```java
+String s1 = "JAVA";
+String s2 = "java";
+
+System.out.println(s1.equalsIgnoreCase(s2));
+```
+
+Output
+
+```
+true
+```
+
+==================================================
+3. toUpperCase()
+==================================================
+
+String ko uppercase me convert karta hai.
+
+Example
+
+```java
+String name = "vijay";
+
+System.out.println(name.toUpperCase());
+```
+
+Output
+
+```
+VIJAY
+```
+
+==================================================
+4. toLowerCase()
+==================================================
+
+String ko lowercase me convert karta hai.
+
+Example
+
+```java
+String name = "VIJAY";
+
+System.out.println(name.toLowerCase());
+```
+
+Output
+
+```
+vijay
+```
+
+==================================================
+5. contains()
+==================================================
+
+Check karta hai string ke andar koi word ya character hai ya nahi.
+
+Example
+
+```java
+String email = "vijay@gmail.com";
+
+System.out.println(email.contains("@"));
+```
+
+Output
+
+```
+true
+```
+
+Example
+
+```java
+System.out.println(email.contains("abc"));
+```
+
+Output
+
+```
+false
+```
+
+Real Spring Boot Example
+
+```java
+if(email.contains("@")){
+    System.out.println("Valid Email");
+}
+```
+
+==================================================
+6. startsWith()
+==================================================
+
+Check karta hai string kis word se start ho rahi hai.
+
+Example
+
+```java
+String website = "https://chat.openai.com";
+
+System.out.println(website.startsWith("https"));
+```
+
+Output
+
+```
+true
+```
+
+Real Project Example
+
+```java
+if(website.startsWith("https")){
+    System.out.println("Secure Website");
+}
+```
+
+==================================================
+7. endsWith()
+==================================================
+
+Check karta hai string kis word ya extension par end ho rahi hai.
+
+Example
+
+```java
+String file = "photo.jpg";
+
+System.out.println(file.endsWith(".jpg"));
+```
+
+Output
+
+```
+true
+```
+
+Real Project Example
+
+```java
+if(file.endsWith(".pdf")){
+    System.out.println("PDF File");
+}
+```
+
+==================================================
+8. substring()
+==================================================
+
+String ka kuch part nikalta hai.
+
+Example
+
+```java
+String name = "Vijay";
+
+System.out.println(name.substring(2));
+```
+
+Output
+
+```
+jay
+```
+
+Memory
+
+```
+V  i  j  a  y
+
+0  1  2  3  4
+```
+
+Index 2 se start
+
+↓
+
+```
+jay
+```
+
+------------------------------------------
+
+Example
+
+```java
+System.out.println(name.substring(1,4));
+```
+
+Output
+
+```
+ija
+```
+
+Rule
+
+```
+Start Index Included
+
+End Index Excluded
+```
+
+==================================================
+9. replace()
+==================================================
+
+Characters ya words ko replace karta hai.
+
+Example
+
+```java
+String name = "Java";
+
+System.out.println(name.replace('a','o'));
+```
+
+Output
+
+```
+Jovo
+```
+
+------------------------------------------
+
+Example
+
+```java
+String text = "I Like Java";
+
+System.out.println(text.replace("Java","Spring"));
+```
+
+Output
+
+```
+I Like Spring
+```
+
+==================================================
+10. split()
+==================================================
+
+Ek String ko multiple parts me todta hai aur Array return karta hai.
+
+Example
+
+```java
+String name = "Java Spring React";
+
+String[] arr = name.split(" ");
+
+for(String s : arr){
+    System.out.println(s);
+}
+```
+
+Output
+
+```
+Java
+
+Spring
+
+React
+```
+
+------------------------------------------
+
+Real Project Example
+
+CSV
+
+```
+Java,Spring,React
+```
+
+```java
+String skills = "Java,Spring,React";
+
+String[] arr = skills.split(",");
+```
+
+Output
+
+```
+Java
+
+Spring
+
+React
+```
+
+==================================================
+Summary Table
+==================================================
+
+| Method | Use |
+|---------|--------------------------------|
+| == | Reference Compare |
+| equals() | Value Compare |
+| equalsIgnoreCase() | Ignore Upper/Lower Case |
+| toUpperCase() | Convert to Uppercase |
+| toLowerCase() | Convert to Lowercase |
+| contains() | Check Word/Character |
+| startsWith() | Check Starting Word |
+| endsWith() | Check Ending Word |
+| substring() | Extract Part of String |
+| replace() | Replace Character/Text |
+| split() | Break String into Array |
+
+==================================================
+Interview Questions
+==================================================
+
+Q1. Difference between == and equals() ?
+
+Answer
+
+```
+== compares reference (memory address)
+
+equals() compares actual string value
+```
+
+------------------------------------------
+
+Q2. Email validation me kaunsa method use hota hai?
+
+Answer
+
+```java
+contains("@")
+```
+
+------------------------------------------
+
+Q3. PDF file check karne ke liye kaunsa method use hota hai?
+
+Answer
+
+```java
+endsWith(".pdf")
+```
+
+------------------------------------------
+
+Q4. URL HTTPS se start hoti hai ya nahi kaise check karenge?
+
+Answer
+
+```java
+startsWith("https")
+```
+
+------------------------------------------
+
+Q5. CSV ko Array me convert kaise karenge?
+
+Answer
+
+```java
+split(",")
+```
+
+==================================================
+Practice Programs
+==================================================
+
+Program 1
+
+User se Name lo.
+
+Uppercase print karo.
+
+------------------------------------------
+
+Program 2
+
+User se Name lo.
+
+Lowercase print karo.
+
+------------------------------------------
+
+Program 3
+
+User se Email lo.
+
+Check karo
+
+@gmail.com
+
+se end hota hai ya nahi.
+
+------------------------------------------
+
+Program 4
+
+User se Website lo.
+
+Check karo
+
+https
+
+se start hoti hai ya nahi.
+
+------------------------------------------
+
+Program 5
+
+User se Full Name lo.
+
+Split karke First Name aur Last Name print karo.
+
+Input
+
+```
+Vijay Prajapati
+```
+
+Output
+
+```
+Vijay
+
+Prajapati
+```
+
+==================================================
+Important Interview Points
+==================================================
+
+✔ == → Reference Compare
+
+✔ equals() → Value Compare
+
+✔ equalsIgnoreCase() → Ignore Case
+
+✔ contains() → Search Word
+
+✔ startsWith() → Starting Check
+
+✔ endsWith() → Ending Check
+
+✔ substring() → Extract Part
+
+✔ replace() → Replace Characters/Words
+
+✔ split() → Convert String into Array
+
+
+
+====================================================
+JAVA STRING PROGRAMS (Interview + Notes)
+====================================================
+
+Ye 10 String Programs Java Interviews, College Viva,
+Coding Rounds aur Spring Boot Development me bahut
+important hote hain.
+
+====================================================
+1. Reverse String ⭐⭐⭐⭐⭐
+====================================================
+
+Definition
+
+Reverse String ka matlab String ko ulta print karna.
+
+Input
+
+Vijay
+
+Output
+
+yajiV
+
+Logic
+
+1. Last index se loop start karo.
+2. Ek-ek character print karo.
+3. Last se First tak print hoga.
+
+Program
+
+```java
+import java.util.Scanner;
+
+public class ReverseString {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter String: ");
+        String str = sc.nextLine();
+
+        for(int i = str.length() - 1; i >= 0; i--) {
+            System.out.print(str.charAt(i));
+        }
+
+        sc.close();
+    }
+}
+```
+
+====================================================
+2. Palindrome String ⭐⭐⭐⭐⭐
+====================================================
+
+Definition
+
+Palindrome String wo hoti hai jo seedha aur ulta
+same read hoti hai.
+
+Example
+
+madam
+level
+racecar
+
+Logic
+
+1. String ko reverse karo.
+2. Original aur Reverse compare karo.
+3. Agar same hai
+
+equals()
+
+↓
+
+Palindrome
+
+Nahi to
+
+Not Palindrome
+
+Program
+
+```java
+import java.util.Scanner;
+
+public class PalindromeString {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter String: ");
+        String str = sc.nextLine();
+
+        String reverse = "";
+
+        for(int i = str.length()-1; i>=0; i--){
+            reverse = reverse + str.charAt(i);
+        }
+
+        if(str.equals(reverse)){
+            System.out.println("Palindrome");
+        }
+        else{
+            System.out.println("Not Palindrome");
+        }
+
+        sc.close();
+    }
+}
+```
+
+====================================================
+3. Count Vowels ⭐⭐⭐⭐
+====================================================
+
+Definition
+
+String me kitne
+
+a
+e
+i
+o
+u
+
+hain count karo.
+
+Input
+
+Vijay
+
+Output
+
+Vowels = 2
+
+Logic
+
+Har character check karo
+
+Agar
+
+a,e,i,o,u
+
+hai
+
+↓
+
+Count++
+
+Program
+
+```java
+import java.util.Scanner;
+
+public class CountVowels {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter String: ");
+
+        String str = sc.nextLine().toLowerCase();
+
+        int count = 0;
+
+        for(int i=0;i<str.length();i++){
+
+            char ch = str.charAt(i);
+
+            if(ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u'){
+                count++;
+            }
+
+        }
+
+        System.out.println("Vowels = "+count);
+
+        sc.close();
+
+    }
+}
+```
+
+====================================================
+4. Count Consonants ⭐⭐⭐⭐
+====================================================
+
+Definition
+
+Jo vowels nahi hote
+
+wo consonants hote hain.
+
+Input
+
+Vijay
+
+Output
+
+Consonants = 3
+
+Logic
+
+Character alphabet hona chahiye
+
+Aur vowel nahi hona chahiye.
+
+Program
+
+```java
+import java.util.Scanner;
+
+public class CountConsonants {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter String: ");
+
+        String str = sc.nextLine().toLowerCase();
+
+        int count = 0;
+
+        for(int i=0;i<str.length();i++){
+
+            char ch = str.charAt(i);
+
+            if(ch>='a' && ch<='z'){
+
+                if(ch!='a' && ch!='e' && ch!='i' && ch!='o' && ch!='u'){
+                    count++;
+                }
+
+            }
+
+        }
+
+        System.out.println("Consonants = "+count);
+
+        sc.close();
+
+    }
+}
+```
+
+====================================================
+5. Count Digits ⭐⭐⭐⭐
+====================================================
+
+Definition
+
+String me kitne digits hain.
+
+Input
+
+Java123
+
+Output
+
+Digits = 3
+
+Logic
+
+Character
+
+0
+
+se
+
+9
+
+ke beech hona chahiye.
+
+Program
+
+```java
+import java.util.Scanner;
+
+public class CountDigits {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter String: ");
+
+        String str = sc.nextLine();
+
+        int count = 0;
+
+        for(int i=0;i<str.length();i++){
+
+            char ch = str.charAt(i);
+
+            if(ch>='0' && ch<='9'){
+                count++;
+            }
+
+        }
+
+        System.out.println("Digits = "+count);
+
+        sc.close();
+
+    }
+}
+```
+
+====================================================
+6. Count Special Characters ⭐⭐⭐⭐
+====================================================
+
+Definition
+
+Letters aur Digits ke alawa jitne characters hain
+unko count karo.
+
+Input
+
+Java@123#
+
+Output
+
+Special Characters = 2
+
+Logic
+
+Letter nahi
+
+Digit nahi
+
+Space nahi
+
+↓
+
+Special Character
+
+Program
+
+```java
+import java.util.Scanner;
+
+public class CountSpecialCharacters {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter String: ");
+
+        String str = sc.nextLine();
+
+        int count = 0;
+
+        for(int i=0;i<str.length();i++){
+
+            char ch = str.charAt(i);
+
+            if(!Character.isLetterOrDigit(ch) && ch!=' '){
+                count++;
+            }
+
+        }
+
+        System.out.println("Special Characters = "+count);
+
+        sc.close();
+
+    }
+}
+```
+
+====================================================
+7. Count Words ⭐⭐⭐⭐⭐
+====================================================
+
+Definition
+
+Sentence me kitne words hain.
+
+Input
+
+Java Spring Boot
+
+Output
+
+Words = 3
+
+Logic
+
+Space ke basis par
+
+split()
+
+use karte hain.
+
+Program
+
+```java
+import java.util.Scanner;
+
+public class CountWords {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter String: ");
+
+        String str = sc.nextLine().trim();
+
+        if(str.isEmpty()){
+            System.out.println("Words = 0");
+        }
+        else{
+
+            String[] words = str.split("\\s+");
+
+            System.out.println("Words = "+words.length);
+
+        }
+
+        sc.close();
+
+    }
+}
+```
+
+====================================================
+8. Character Frequency ⭐⭐⭐⭐⭐
+====================================================
+
+Definition
+
+Har character kitni baar aaya hai.
+
+Input
+
+banana
+
+Output
+
+b = 1
+
+a = 3
+
+n = 2
+
+Logic
+
+Outer loop
+
+↓
+
+Alphabet
+
+Inner Loop
+
+↓
+
+String
+
+Compare
+
+↓
+
+Count
+
+Program
+
+```java
+import java.util.Scanner;
+
+public class CharacterFrequency {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter String: ");
+
+        String str = sc.nextLine().toLowerCase();
+
+        for(char ch='a'; ch<='z'; ch++){
+
+            int count = 0;
+
+            for(int i=0;i<str.length();i++){
+
+                if(str.charAt(i)==ch){
+                    count++;
+                }
+
+            }
+
+            if(count>0){
+                System.out.println(ch+" = "+count);
+            }
+
+        }
+
+        sc.close();
+
+    }
+}
+```
+
+====================================================
+9. Remove Spaces ⭐⭐⭐⭐
+====================================================
+
+Definition
+
+String ke saare spaces hata do.
+
+Input
+
+Java Spring Boot
+
+Output
+
+JavaSpringBoot
+
+Logic
+
+replace()
+
+method use karenge.
+
+Program
+
+```java
+import java.util.Scanner;
+
+public class RemoveSpaces {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter String: ");
+
+        String str = sc.nextLine();
+
+        str = str.replace(" ","");
+
+        System.out.println(str);
+
+        sc.close();
+
+    }
+}
+```
+
+====================================================
+10. Anagram ⭐⭐⭐⭐⭐
+====================================================
+
+Definition
+
+Dono Strings me same letters hone chahiye.
+
+Order alag ho sakta hai.
+
+Example
+
+listen
+
+silent
+
+↓
+
+Anagram
+
+Logic
+
+1. String ko Character Array me convert karo.
+
+2. Sort karo.
+
+3. Compare karo.
+
+Program
+
+```java
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Anagram {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter First String: ");
+        String s1 = sc.nextLine().toLowerCase();
+
+        System.out.print("Enter Second String: ");
+        String s2 = sc.nextLine().toLowerCase();
+
+        char[] a = s1.toCharArray();
+        char[] b = s2.toCharArray();
+
+        Arrays.sort(a);
+        Arrays.sort(b);
+
+        if(Arrays.equals(a,b)){
+            System.out.println("Anagram");
+        }
+        else{
+            System.out.println("Not Anagram");
+        }
+
+        sc.close();
+
+    }
+}
+```
+
+====================================================
+Interview Questions
+====================================================
+
+Q1. Reverse String kaise karte hain?
+
+Answer
+
+Last index se first index tak loop chala kar.
+
+---------------------------------------
+
+Q2. Palindrome check kaise karte hain?
+
+Answer
+
+Original String aur Reverse String ko
+
+equals()
+
+se compare karte hain.
+
+---------------------------------------
+
+Q3. Vowels count kaise karte hain?
+
+Answer
+
+a,e,i,o,u
+
+check karte hain.
+
+---------------------------------------
+
+Q4. Words count kaise karte hain?
+
+Answer
+
+split("\\s+")
+
+---------------------------------------
+
+Q5. Spaces remove kaise karte hain?
+
+Answer
+
+replace(" ","")
+
+---------------------------------------
+
+Q6. Anagram check kaise karte hain?
+
+Answer
+
+Character Array
+
+↓
+
+Sort
+
+↓
+
+Arrays.equals()
+
+====================================================
+String Programs Checklist
+====================================================
+
+✅ Reverse String
+
+✅ Palindrome String
+
+✅ Count Vowels
+
+✅ Count Consonants
+
+✅ Count Digits
+
+✅ Count Special Characters
+
+✅ Count Words
+
+✅ Character Frequency
+
+✅ Remove Spaces
+
+✅ Anagram
+
+====================================================
+Spring Boot me Inka Use
+====================================================
+
+✔ Login Validation
+
+✔ Email Validation
+
+✔ Password Validation
+
+✔ JWT Parsing
+
+✔ REST API
+
+✔ JSON Data
+
+✔ File Upload
+
+✔ CSV Processing
+
+✔ Search Feature
+
+✔ User Input Validation

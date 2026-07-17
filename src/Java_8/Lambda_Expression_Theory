@@ -1,0 +1,2073 @@
+# JAVA 8 — LAMBDA EXPRESSIONS COMPLETE THEORY
+
+## 1. INTRODUCTION
+
+Lambda Expression Java 8 me introduce hua tha.
+
+Lambda Expression ka use Functional Interface ke single abstract method ka implementation concise form me provide karne ke liye kiya jata hai.
+
+Simple definition:
+
+Lambda Expression ek concise way hai Functional Interface ke single abstract method ka implementation likhne ka.
+
+Example:
+
+```java
+() -> System.out.println("Hello");
+```
+
+Lambda Expression ko commonly anonymous function-like syntax kaha jata hai because:
+
+- Iska apna method name nahi hota
+- Implementation directly likha jata hai
+- Parameters ho sakte hain
+- Body ho sakti hai
+- Value return kar sakta hai
+
+Lekin Java me Lambda Expression independently exist nahi karta.
+
+Lambda ko ek target type chahiye, aur wo target type generally Functional Interface hota hai.
+
+
+============================================================
+2. LAMBDA EXPRESSION KYU INTRODUCE HUA?
+============================================================
+
+Java 8 se pehle agar kisi interface ke method ka implementation dena hota tha, to commonly:
+
+1. Separate Implementation Class
+2. Anonymous Inner Class
+
+use ki jati thi.
+
+
+Example Interface:
+
+```java
+interface Greeting {
+
+    void greet();
+
+}
+```
+
+
+Traditional Implementation:
+
+```java
+class GreetingImpl implements Greeting {
+
+    @Override
+    public void greet() {
+
+        System.out.println("Hello Vijay");
+
+    }
+}
+```
+
+
+Object:
+
+```java
+Greeting greeting = new GreetingImpl();
+
+greeting.greet();
+```
+
+
+Problem:
+
+Sirf ek chhote method ka implementation dene ke liye:
+
+- Separate class
+- implements keyword
+- @Override
+- Method declaration
+- Extra boilerplate code
+
+likhna pad raha tha.
+
+
+============================================================
+3. ANONYMOUS INNER CLASS
+============================================================
+
+Separate implementation class ko remove karne ke liye Anonymous Inner Class use kar sakte the.
+
+
+Example:
+
+```java
+Greeting greeting = new Greeting() {
+
+    @Override
+    public void greet() {
+
+        System.out.println("Hello Vijay");
+
+    }
+
+};
+```
+
+
+Separate class remove ho gayi.
+
+Lekin code abhi bhi verbose tha.
+
+
+Java 8 Lambda:
+
+```java
+Greeting greeting =
+        () -> System.out.println("Hello Vijay");
+```
+
+
+Same purpose, much less boilerplate.
+
+
+============================================================
+4. EVOLUTION TO LAMBDA
+============================================================
+
+Step 1:
+
+Separate Implementation Class
+
+```java
+class GreetingImpl implements Greeting {
+
+    @Override
+    public void greet() {
+
+        System.out.println("Hello");
+
+    }
+}
+```
+
+
+Step 2:
+
+Anonymous Inner Class
+
+```java
+Greeting greeting = new Greeting() {
+
+    @Override
+    public void greet() {
+
+        System.out.println("Hello");
+
+    }
+
+};
+```
+
+
+Step 3:
+
+Lambda Expression
+
+```java
+Greeting greeting =
+        () -> System.out.println("Hello");
+```
+
+
+Evolution:
+
+```text
+Separate Class
+      ↓
+Anonymous Inner Class
+      ↓
+Lambda Expression
+```
+
+
+============================================================
+5. BASIC SYNTAX OF LAMBDA EXPRESSION
+============================================================
+
+General Syntax:
+
+```java
+(parameters) -> {
+    // Lambda Body
+}
+```
+
+
+Lambda ke main parts:
+
+```text
+(parameters)   ->   body
+     ↑          ↑     ↑
+   Input      Arrow  Logic
+```
+
+
+Example:
+
+```java
+() -> System.out.println("Hello");
+```
+
+
+Here:
+
+```text
+()       = No Parameters
+
+->       = Lambda Operator / Arrow Operator
+
+System.out.println("Hello")
+         =
+Lambda Body
+```
+
+
+============================================================
+6. LAMBDA OPERATOR
+============================================================
+
+Lambda me:
+
+```java
+->
+```
+
+ko Lambda Operator ya Arrow Operator kaha jata hai.
+
+
+Example:
+
+```java
+() -> System.out.println("Hello");
+```
+
+
+Left Side:
+
+```java
+()
+```
+
+Parameters
+
+
+Right Side:
+
+```java
+System.out.println("Hello")
+```
+
+Method implementation / Lambda body
+
+
+============================================================
+7. FUNCTIONAL INTERFACE AND LAMBDA
+============================================================
+
+Lambda Expression Functional Interface ke saath use hota hai.
+
+
+Functional Interface:
+
+Aisa interface jisme exactly one abstract method hota hai.
+
+
+Example:
+
+```java
+@FunctionalInterface
+interface Greeting {
+
+    void greet();
+
+}
+```
+
+
+Lambda:
+
+```java
+Greeting greeting =
+        () -> System.out.println("Hello");
+```
+
+
+Compiler ko pata hai ki:
+
+```java
+Greeting
+```
+
+ka single abstract method:
+
+```java
+void greet();
+```
+
+hai.
+
+
+Isliye Lambda:
+
+```java
+() -> System.out.println("Hello");
+```
+
+`greet()` method ka implementation provide karta hai.
+
+
+============================================================
+8. TARGET TYPE
+============================================================
+
+Lambda Expression ka apna standalone type nahi hota.
+
+Usko context se target type milta hai.
+
+
+Example:
+
+```java
+Greeting greeting =
+        () -> System.out.println("Hello");
+```
+
+
+Yahan target type hai:
+
+```java
+Greeting
+```
+
+
+Compiler check karta hai:
+
+```text
+Greeting
+    ↓
+Single Abstract Method
+    ↓
+void greet()
+```
+
+
+Lambda:
+
+```java
+() -> System.out.println("Hello")
+```
+
+
+match karta hai:
+
+```java
+void greet()
+```
+
+
+Isliye code valid hai.
+
+
+Ye directly standalone statement ki tarah valid nahi:
+
+```java
+() -> System.out.println("Hello"); // ❌
+```
+
+Lambda ko target context chahiye.
+
+
+============================================================
+9. NO PARAMETER LAMBDA
+============================================================
+
+Interface:
+
+```java
+@FunctionalInterface
+interface Message {
+
+    void show();
+
+}
+```
+
+
+Lambda:
+
+```java
+Message message =
+        () -> System.out.println("Hello");
+```
+
+
+Call:
+
+```java
+message.show();
+```
+
+
+Output:
+
+```text
+Hello
+```
+
+
+No parameter hone par:
+
+```java
+()
+```
+
+required hai.
+
+
+============================================================
+10. ONE PARAMETER LAMBDA
+============================================================
+
+Interface:
+
+```java
+@FunctionalInterface
+interface Greeting {
+
+    void greet(String name);
+
+}
+```
+
+
+Full Lambda:
+
+```java
+Greeting greeting = (String name) -> {
+
+    System.out.println("Hello " + name);
+
+};
+```
+
+
+Compiler parameter type infer kar sakta hai:
+
+```java
+Greeting greeting = (name) -> {
+
+    System.out.println("Hello " + name);
+
+};
+```
+
+
+Single parameter ke case me parentheses optional hain:
+
+```java
+Greeting greeting =
+        name -> System.out.println("Hello " + name);
+```
+
+
+Call:
+
+```java
+greeting.greet("Vijay");
+```
+
+
+Output:
+
+```text
+Hello Vijay
+```
+
+
+============================================================
+11. MULTIPLE PARAMETER LAMBDA
+============================================================
+
+Interface:
+
+```java
+@FunctionalInterface
+interface Calculator {
+
+    int calculate(int a, int b);
+
+}
+```
+
+
+Lambda:
+
+```java
+Calculator add = (a, b) -> {
+
+    return a + b;
+
+};
+```
+
+
+Short form:
+
+```java
+Calculator add =
+        (a, b) -> a + b;
+```
+
+
+Call:
+
+```java
+int result =
+        add.calculate(10, 20);
+```
+
+
+Result:
+
+```text
+30
+```
+
+
+Multiple parameters me parentheses required hain:
+
+```java
+(a, b) -> a + b
+```
+
+
+Ye invalid hai:
+
+```java
+a, b -> a + b   // ❌
+```
+
+
+============================================================
+12. TYPE INFERENCE
+============================================================
+
+Java compiler Lambda parameters ke types target Functional Interface se infer kar sakta hai.
+
+
+Interface:
+
+```java
+interface Calculator {
+
+    int calculate(int a, int b);
+
+}
+```
+
+
+Full:
+
+```java
+Calculator add =
+        (int a, int b) -> a + b;
+```
+
+
+Short:
+
+```java
+Calculator add =
+        (a, b) -> a + b;
+```
+
+
+Compiler already jaanta hai:
+
+```text
+a = int
+b = int
+```
+
+
+Is concept ko:
+
+```text
+Type Inference
+```
+
+kehte hain.
+
+
+============================================================
+13. SINGLE STATEMENT LAMBDA
+============================================================
+
+Agar Lambda body me sirf ek statement hai:
+
+```java
+() -> {
+
+    System.out.println("Hello");
+
+}
+```
+
+
+To braces remove kar sakte hain:
+
+```java
+() -> System.out.println("Hello")
+```
+
+
+Example:
+
+```java
+Message message =
+        () -> System.out.println("Hello");
+```
+
+
+============================================================
+14. MULTIPLE STATEMENT LAMBDA
+============================================================
+
+Agar Lambda body me multiple statements hain, braces required hain.
+
+
+Example:
+
+```java
+Calculator add = (a, b) -> {
+
+    System.out.println("Calculating...");
+
+    int result = a + b;
+
+    return result;
+
+};
+```
+
+
+Multiple statements:
+
+```java
+{
+    // statements
+}
+```
+
+required.
+
+
+============================================================
+15. RETURN VALUE IN LAMBDA
+============================================================
+
+Interface:
+
+```java
+interface Calculator {
+
+    int calculate(int a, int b);
+
+}
+```
+
+
+Block body:
+
+```java
+Calculator add = (a, b) -> {
+
+    return a + b;
+
+};
+```
+
+
+Agar single expression hai:
+
+```java
+Calculator add =
+        (a, b) -> a + b;
+```
+
+
+Yahan:
+
+```java
+return
+```
+
+likhne ki zarurat nahi.
+
+
+Compiler automatically expression ka result return karta hai.
+
+
+IMPORTANT:
+
+Ye valid hai:
+
+```java
+(a, b) -> a + b
+```
+
+
+Ye bhi valid hai:
+
+```java
+(a, b) -> {
+    return a + b;
+}
+```
+
+
+Lekin ye invalid hai:
+
+```java
+(a, b) -> {
+    a + b;
+}
+```
+
+because block body me return value explicitly return karni hogi.
+
+
+============================================================
+16. SAME FUNCTIONAL INTERFACE, DIFFERENT BEHAVIOR
+============================================================
+
+Interface:
+
+```java
+interface Calculator {
+
+    int calculate(int a, int b);
+
+}
+```
+
+
+Addition:
+
+```java
+Calculator add =
+        (a, b) -> a + b;
+```
+
+
+Subtraction:
+
+```java
+Calculator subtract =
+        (a, b) -> a - b;
+```
+
+
+Multiplication:
+
+```java
+Calculator multiply =
+        (a, b) -> a * b;
+```
+
+
+Division:
+
+```java
+Calculator divide =
+        (a, b) -> a / b;
+```
+
+
+Same interface:
+
+```text
+Calculator
+     |
+     |--- Addition Lambda
+     |
+     |--- Subtraction Lambda
+     |
+     |--- Multiplication Lambda
+     |
+     |--- Division Lambda
+```
+
+
+Lambda allows behavior to be passed/stored as an object of a Functional Interface type.
+
+
+============================================================
+17. LAMBDA EXPRESSION IS NOT A METHOD NAME
+============================================================
+
+Normal method:
+
+```java
+public int add(int a, int b) {
+
+    return a + b;
+
+}
+```
+
+
+Has:
+
+- Access Modifier
+- Return Type
+- Method Name
+- Parameters
+- Body
+
+
+Lambda:
+
+```java
+(a, b) -> a + b
+```
+
+
+Does not explicitly contain:
+
+- Access Modifier
+- Method Name
+- Return Type
+
+
+Compiler gets required information from the target Functional Interface.
+
+
+============================================================
+18. @FunctionalInterface ANNOTATION
+============================================================
+
+Example:
+
+```java
+@FunctionalInterface
+interface Calculator {
+
+    int calculate(int a, int b);
+
+}
+```
+
+
+`@FunctionalInterface` annotation compiler ko indicate karta hai ki interface ko Functional Interface ke roop me maintain karna hai.
+
+
+Agar second abstract method add karenge:
+
+```java
+@FunctionalInterface
+interface Calculator {
+
+    int add(int a, int b);
+
+    int subtract(int a, int b);
+
+}
+```
+
+
+Compile-time error aayega.
+
+
+IMPORTANT:
+
+`@FunctionalInterface` annotation mandatory nahi hai.
+
+
+Ye bhi Functional Interface hai:
+
+```java
+interface Calculator {
+
+    int calculate(int a, int b);
+
+}
+```
+
+
+Lekin annotation use karna good practice hai.
+
+
+============================================================
+19. FUNCTIONAL INTERFACE ME DEFAULT METHOD
+============================================================
+
+Functional Interface me exactly one abstract method hona chahiye.
+
+Lekin multiple default methods ho sakte hain.
+
+
+Example:
+
+```java
+@FunctionalInterface
+interface Demo {
+
+    void show();
+
+
+    default void print() {
+
+        System.out.println("Print");
+
+    }
+
+}
+```
+
+
+Ye valid Functional Interface hai.
+
+
+Kyunki abstract method sirf:
+
+```java
+void show();
+```
+
+hai.
+
+
+============================================================
+20. FUNCTIONAL INTERFACE ME STATIC METHOD
+============================================================
+
+Static methods bhi allowed hain.
+
+
+Example:
+
+```java
+@FunctionalInterface
+interface Demo {
+
+    void show();
+
+
+    static void test() {
+
+        System.out.println("Test");
+
+    }
+
+}
+```
+
+
+Ye valid hai.
+
+
+Functional Interface restriction:
+
+```text
+Exactly One Abstract Method
+```
+
+
+Not:
+
+```text
+Exactly One Total Method
+```
+
+
+============================================================
+21. LAMBDA AND RUNNABLE
+============================================================
+
+Runnable Java ka built-in Functional Interface hai.
+
+
+Conceptually:
+
+```java
+@FunctionalInterface
+public interface Runnable {
+
+    void run();
+
+}
+```
+
+
+Traditional Anonymous Class:
+
+```java
+Runnable task = new Runnable() {
+
+    @Override
+    public void run() {
+
+        System.out.println("Task Running");
+
+    }
+
+};
+```
+
+
+Lambda:
+
+```java
+Runnable task =
+        () -> System.out.println("Task Running");
+```
+
+
+Thread:
+
+```java
+Thread thread =
+        new Thread(task);
+
+thread.start();
+```
+
+
+Directly:
+
+```java
+new Thread(
+        () -> System.out.println("Task Running")
+).start();
+```
+
+
+============================================================
+22. LAMBDA AND COLLECTIONS
+============================================================
+
+Lambda Collections ke saath frequently use hota hai.
+
+
+Example:
+
+```java
+List<String> names =
+        List.of("Vijay", "Rahul", "Aman");
+```
+
+
+Traditional loop:
+
+```java
+for (String name : names) {
+
+    System.out.println(name);
+
+}
+```
+
+
+Lambda with forEach:
+
+```java
+names.forEach(
+        name -> System.out.println(name)
+);
+```
+
+
+Shorter:
+
+```java
+names.forEach(
+        System.out::println
+);
+```
+
+
+Last example Method Reference hai, jo Lambda ke baad ka topic hai.
+
+
+============================================================
+23. LAMBDA AND SORTING
+============================================================
+
+Example:
+
+```java
+List<String> names =
+        new ArrayList<>();
+```
+
+
+Sorting:
+
+```java
+names.sort(
+        (name1, name2) ->
+                name1.compareTo(name2)
+);
+```
+
+
+Yahan Lambda Comparator behavior provide kar raha hai.
+
+
+============================================================
+24. LAMBDA AND STREAM API
+============================================================
+
+Lambda ka sabse common real use Stream API me hota hai.
+
+
+Example:
+
+```java
+students.stream()
+
+        .filter(
+            student ->
+                student.getMarks() > 80
+        )
+
+        .forEach(
+            student ->
+                System.out.println(student)
+        );
+```
+
+
+Here:
+
+```java
+student -> student.getMarks() > 80
+```
+
+Lambda Expression hai.
+
+
+Aur:
+
+```java
+student -> System.out.println(student)
+```
+
+bhi Lambda Expression hai.
+
+
+============================================================
+25. LAMBDA AND FUNCTIONAL PROGRAMMING
+============================================================
+
+Java pure Functional Programming language nahi hai.
+
+Java primarily Object-Oriented Programming language hai.
+
+Java 8 ne Functional Programming style ke important features add kiye:
+
+- Lambda Expressions
+- Functional Interfaces
+- Stream API
+- Method References
+
+
+Lambda ki wajah se behavior ko concise form me represent aur pass karna easier hua.
+
+
+============================================================
+26. BEHAVIOR PASSING
+============================================================
+
+Lambda ka powerful concept:
+
+Behavior ko argument ki tarah pass kar sakte hain.
+
+
+Example:
+
+```java
+interface Operation {
+
+    int apply(int a, int b);
+
+}
+```
+
+
+Method:
+
+```java
+static int calculate(
+        int a,
+        int b,
+        Operation operation
+) {
+
+    return operation.apply(a, b);
+
+}
+```
+
+
+Call:
+
+```java
+int result = calculate(
+        10,
+        20,
+        (a, b) -> a + b
+);
+```
+
+
+Yahan:
+
+```java
+(a, b) -> a + b
+```
+
+behavior argument ke form me pass hua.
+
+
+Different behavior:
+
+```java
+calculate(
+        10,
+        20,
+        (a, b) -> a * b
+);
+```
+
+
+Same method:
+
+```java
+calculate()
+```
+
+Different behavior.
+
+
+============================================================
+27. VARIABLE CAPTURE
+============================================================
+
+Lambda surrounding scope ke local variables access kar sakta hai.
+
+
+Example:
+
+```java
+int bonus = 1000;
+
+
+Runnable task = () -> {
+
+    System.out.println(bonus);
+
+};
+```
+
+
+Ye valid hai.
+
+
+Lekin local variable:
+
+```java
+bonus
+```
+
+final ya effectively final hona chahiye.
+
+
+============================================================
+28. EFFECTIVELY FINAL
+============================================================
+
+Example:
+
+```java
+int bonus = 1000;
+
+
+Runnable task = () -> {
+
+    System.out.println(bonus);
+
+};
+```
+
+
+`bonus` explicitly final nahi hai:
+
+```java
+final int bonus = 1000;
+```
+
+Lekin value change nahi ho rahi.
+
+Isliye ye:
+
+```text
+Effectively Final
+```
+
+hai.
+
+
+Agar:
+
+```java
+int bonus = 1000;
+
+
+Runnable task = () -> {
+
+    System.out.println(bonus);
+
+};
+
+
+bonus = 2000;
+```
+
+
+Compile-time error ho sakta hai because captured local variable effectively final nahi raha.
+
+
+============================================================
+29. this KEYWORD IN LAMBDA
+============================================================
+
+Lambda Expression apna separate `this` context create nahi karta.
+
+Lambda ke andar `this` enclosing class/object ko refer karta hai.
+
+
+Ye Anonymous Inner Class se important difference hai.
+
+
+Anonymous Inner Class:
+
+`this`
+
+anonymous class object ko refer kar sakta hai.
+
+
+Lambda:
+
+`this`
+
+enclosing object ko refer karta hai.
+
+
+============================================================
+30. LAMBDA VS ANONYMOUS INNER CLASS
+============================================================
+
+LAMBDA:
+
+- Concise syntax
+- Functional Interface ke liye
+- Separate `this` context nahi banata
+- Functional-style behavior representation ke liye useful
+
+
+ANONYMOUS INNER CLASS:
+
+- More verbose
+- Anonymous class instance create hota hai
+- Apna `this` context hota hai
+- Multiple methods implement/override karne wale suitable type scenarios me use ho sakta hai
+
+
+IMPORTANT:
+
+Lambda ko sirf Anonymous Inner Class ka textual shortcut samajhna completely accurate nahi hai.
+
+Dono ke semantics me differences hain, especially:
+
+```text
+this
+scope
+implementation model
+```
+
+
+============================================================
+31. ADVANTAGES OF LAMBDA EXPRESSIONS
+============================================================
+
+1. Less Boilerplate Code
+
+Traditional:
+
+```java
+new Runnable() {
+
+    @Override
+    public void run() {
+
+        System.out.println("Hello");
+
+    }
+
+};
+```
+
+
+Lambda:
+
+```java
+() -> System.out.println("Hello")
+```
+
+
+2. Code More Concise
+
+Less unnecessary syntax.
+
+
+3. Functional Programming Style
+
+Behavior ko pass aur compose karna easier.
+
+
+4. Collections Processing
+
+Filtering, mapping, sorting me useful.
+
+
+5. Stream API Integration
+
+Stream API extensively Lambda use karti hai.
+
+
+6. Asynchronous Programming
+
+Example:
+
+```java
+CompletableFuture.runAsync(
+        () -> sendEmail()
+);
+```
+
+
+7. Multithreading
+
+Example:
+
+```java
+new Thread(
+        () -> doWork()
+).start();
+```
+
+
+============================================================
+32. LIMITATIONS / IMPORTANT POINTS
+============================================================
+
+1. Lambda Functional Interface ke target context me use hota hai.
+
+2. Interface me multiple abstract methods honge to same interface target ke roop me Lambda use nahi kar sakte.
+
+3. Overly complex Lambda readability reduce kar sakta hai.
+
+Bad:
+
+```java
+list.stream()
+    .filter(x -> {
+        // 30 lines of complicated code
+    });
+```
+
+
+Better:
+
+Complex logic ko named method me move karo.
+
+
+4. Captured local variables final/effectively final hone chahiye.
+
+
+5. Lambda har normal method ka replacement nahi hai.
+
+
+============================================================
+33. COMMON LAMBDA FORMS
+============================================================
+
+No Input, No Return:
+
+```java
+() -> System.out.println("Hello")
+```
+
+
+One Input, No Return:
+
+```java
+name -> System.out.println(name)
+```
+
+
+Two Inputs, Return:
+
+```java
+(a, b) -> a + b
+```
+
+
+Multiple Statements:
+
+```java
+(a, b) -> {
+
+    int result = a + b;
+
+    System.out.println(result);
+
+    return result;
+
+}
+```
+
+
+============================================================
+34. LAMBDA SYNTAX RULES
+============================================================
+
+RULE 1:
+
+No parameters:
+
+```java
+() -> body
+```
+
+
+RULE 2:
+
+One parameter:
+
+```java
+name -> body
+```
+
+or:
+
+```java
+(name) -> body
+```
+
+
+RULE 3:
+
+Multiple parameters:
+
+```java
+(a, b) -> body
+```
+
+
+RULE 4:
+
+Single statement:
+
+```java
+() -> System.out.println("Hello")
+```
+
+
+RULE 5:
+
+Multiple statements:
+
+```java
+() -> {
+
+    statement1;
+
+    statement2;
+
+}
+```
+
+
+RULE 6:
+
+Single expression returning value:
+
+```java
+(a, b) -> a + b
+```
+
+
+RULE 7:
+
+Block returning value:
+
+```java
+(a, b) -> {
+
+    return a + b;
+
+}
+```
+
+
+============================================================
+35. REAL PROJECT USE CASES
+============================================================
+
+Lambda Expressions commonly use hote hain:
+
+
+1. COLLECTION ITERATION
+
+```java
+students.forEach(
+        student ->
+                System.out.println(student)
+);
+```
+
+
+2. FILTERING
+
+```java
+students.stream()
+        .filter(
+            student ->
+                    student.getMarks() > 80
+        );
+```
+
+
+3. MAPPING
+
+```java
+students.stream()
+        .map(
+            student ->
+                    student.getName()
+        );
+```
+
+
+4. SORTING
+
+```java
+students.sort(
+        (s1, s2) ->
+                s1.getName()
+                  .compareTo(s2.getName())
+);
+```
+
+
+5. MULTITHREADING
+
+```java
+new Thread(
+        () -> doWork()
+).start();
+```
+
+
+6. ASYNCHRONOUS PROGRAMMING
+
+```java
+CompletableFuture.runAsync(
+        () -> sendEmail()
+);
+```
+
+
+7. EVENT HANDLING
+
+GUI/event-based applications me event actions define karne ke liye.
+
+
+8. FUNCTIONAL INTERFACES
+
+Predicate
+Consumer
+Supplier
+Function
+
+
+============================================================
+36. IMPORTANT INTERVIEW QUESTIONS
+============================================================
+
+Q1. Lambda Expression kya hai?
+
+Lambda Expression Functional Interface ke single abstract method ka concise implementation provide karta hai.
+
+
+Q2. Lambda Java me kab introduce hua?
+
+Java 8.
+
+
+Q3. Lambda kis interface ke saath use hota hai?
+
+Functional Interface.
+
+
+Q4. Functional Interface kya hai?
+
+Aisa interface jisme exactly one abstract method hota hai.
+
+
+Q5. Lambda operator kya hai?
+
+```java
+->
+```
+
+
+Q6. Lambda ka syntax?
+
+```java
+(parameters) -> body
+```
+
+
+Q7. Kya Lambda ka method name hota hai?
+
+Nahi.
+
+Target Functional Interface ka abstract method determine karta hai ki Lambda kis contract ko implement kar raha hai.
+
+
+Q8. Kya Lambda multiple parameters le sakta hai?
+
+Haan.
+
+
+Example:
+
+```java
+(a, b) -> a + b
+```
+
+
+Q9. Kya Lambda value return kar sakta hai?
+
+Haan.
+
+
+Example:
+
+```java
+(a, b) -> a + b
+```
+
+
+Q10. Kya Lambda multiple abstract methods wale interface ke liye use ho sakta hai?
+
+Us interface ko target Functional Interface ke roop me nahi, because Lambda target ko single abstract method contract chahiye.
+
+
+Q11. `@FunctionalInterface` mandatory hai?
+
+Nahi.
+
+Lekin recommended hai.
+
+
+Q12. Functional Interface me default methods ho sakte hain?
+
+Haan.
+
+
+Q13. Functional Interface me static methods ho sakte hain?
+
+Haan.
+
+
+Q14. Lambda local variable access kar sakta hai?
+
+Haan, captured local variable final ya effectively final hona chahiye.
+
+
+Q15. Lambda aur Anonymous Inner Class same hain?
+
+Nahi.
+
+Purpose kuch cases me similar lag sakta hai, lekin semantics different hain, especially `this` aur scope ke behavior me.
+
+
+============================================================
+37. LAMBDA COMPLETE FLOW
+============================================================
+
+```text
+Interface
+    ↓
+Exactly One Abstract Method
+    ↓
+Functional Interface
+    ↓
+Lambda Expression
+    ↓
+Short Method Implementation
+    ↓
+Used In
+    |
+    |--- Collections
+    |
+    |--- Stream API
+    |
+    |--- Multithreading
+    |
+    |--- CompletableFuture
+    |
+    |--- Sorting
+    |
+    |--- Functional Programming
+```
+
+
+============================================================
+38. SIMPLE MEMORY TRICK
+============================================================
+
+Lambda:
+
+```text
+INPUT → WORK
+```
+
+
+No Input:
+
+```java
+() -> work
+```
+
+
+One Input:
+
+```java
+x -> work
+```
+
+
+Two Inputs:
+
+```java
+(a, b) -> work
+```
+
+
+Return Result:
+
+```java
+(a, b) -> a + b
+```
+
+
+============================================================
+39. MOST IMPORTANT CONCEPT
+============================================================
+
+Lambda ko sirf:
+
+"Code short karne ka feature"
+
+mat samjho.
+
+
+Actual important concept:
+
+```text
+Behavior ko represent karna
+        ↓
+Functional Interface ke object ke form me
+        ↓
+Behavior ko store/pass/use karna
+```
+
+
+Example:
+
+```java
+Calculator add =
+        (a, b) -> a + b;
+```
+
+
+Yahan:
+
+```java
+(a, b) -> a + b
+```
+
+Addition ka behavior hai.
+
+
+Aur:
+
+```java
+Calculator multiply =
+        (a, b) -> a * b;
+```
+
+
+Yahan multiplication ka behavior hai.
+
+
+Same interface:
+
+```java
+Calculator
+```
+
+Different behaviors.
+
+
+============================================================
+40. FINAL DEFINITION
+============================================================
+
+Lambda Expression is a concise way to provide the implementation of the single abstract method of a Functional Interface.
+
+It was introduced in Java 8 and is widely used with:
+
+- Functional Interfaces
+- Collections
+- Stream API
+- Multithreading
+- CompletableFuture
+- Event Handling
+- Modern Java programming
+
+
+============================================================
+41. ONE-LINE REVISION
+============================================================
+
+```text
+Lambda Expression
+        =
+Functional Interface ke
+Single Abstract Method
+ka concise implementation
+```
+
+
+============================================================
+42. FINAL EXAMPLE
+============================================================
+
+Functional Interface:
+
+```java
+@FunctionalInterface
+interface Calculator {
+
+    int calculate(int a, int b);
+
+}
+```
+
+
+Lambda Implementations:
+
+```java
+Calculator add =
+        (a, b) -> a + b;
+
+
+Calculator subtract =
+        (a, b) -> a - b;
+
+
+Calculator multiply =
+        (a, b) -> a * b;
+
+
+Calculator divide =
+        (a, b) -> a / b;
+```
+
+
+Use:
+
+```java
+System.out.println(
+        add.calculate(20, 10)
+);
+
+System.out.println(
+        subtract.calculate(20, 10)
+);
+
+System.out.println(
+        multiply.calculate(20, 10)
+);
+
+System.out.println(
+        divide.calculate(20, 10)
+);
+```
+
+
+Output:
+
+```text
+30
+10
+200
+2
+```
+
+
+============================================================
+FINAL CONCEPT MAP
+============================================================
+
+JAVA 8
+  |
+  └── Lambda Expression
+          |
+          ├── Functional Interface Required
+          |
+          ├── Syntax
+          |      |
+          |      └── (parameters) -> body
+          |
+          ├── Benefits
+          |      |
+          |      ├── Less Boilerplate
+          |      ├── Concise Code
+          |      └── Behavior Passing
+          |
+          └── Used With
+                 |
+                 ├── Runnable
+                 ├── Comparator
+                 ├── Predicate
+                 ├── Consumer
+                 ├── Supplier
+                 ├── Function
+                 ├── Stream API
+                 └── CompletableFuture

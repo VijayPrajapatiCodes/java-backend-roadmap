@@ -1,0 +1,177 @@
+=========================================
+Java Methods - Summary Notes
+=========================================
+
+| Topic                      | Important Point                                  |
+|----------------------------|--------------------------------------------------|
+| Method Without Parameters  | No Input (Method me koi parameter nahi hota)     |
+| Method With Parameters     | Input Pass (Method ko value di jati hai)         |
+| Parameter                  | Method Declaration me likha jata hai             |
+| Argument                   | Method Call ke time value pass ki jati hai       |
+| Return Type                | Method value return karta hai                    |
+| void                       | Koi value return nahi karta                      |
+| return                     | Method se value wapas bhejta hai                 |
+| Method Overloading         | Same Method Name + Different Parameters          |
+
+=========================================
+Golden Interview Lines
+=========================================
+
+✔ Method Without Parameters
+→ Method me koi input pass nahi hota.
+
+✔ Method With Parameters
+→ Method ko input (value) pass ki jati hai.
+
+✔ Parameter
+→ Method Declaration me likha jata hai.
+
+Example:
+
+```java
+public static void add(int a, int b)
+```
+
+Yahan
+
+```
+a
+b
+```
+
+Parameters hain.
+
+-----------------------------------------
+
+✔ Argument
+→ Method Call ke time value pass ki jati hai.
+
+Example
+
+```java
+add(10,20);
+```
+
+Yahan
+
+```
+10
+20
+```
+
+Arguments hain.
+
+-----------------------------------------
+
+✔ Return Type
+→ Method kisi value ko return karta hai.
+
+Example
+
+```java
+public static int add(int a,int b){
+
+    return a+b;
+
+}
+```
+
+-----------------------------------------
+
+✔ void
+→ Method sirf kaam karta hai, koi value return nahi karta.
+
+Example
+
+```java
+public static void greeting(){
+
+    System.out.println("Hello");
+
+}
+```
+
+-----------------------------------------
+
+✔ return
+→ Method se value wapas bhejta hai.
+
+Example
+
+```java
+public static int square(int n){
+
+    return n*n;
+
+}
+```
+
+-----------------------------------------
+
+✔ Method Overloading
+→ Same Method Name + Different Parameters
+
+Example
+
+```java
+add(int a,int b)
+
+add(int a,int b,int c)
+```
+
+Ye Method Overloading hai.
+
+=========================================
+Interview Formula (1 Minute Revision)
+=========================================
+
+Method Without Parameters
+↓
+
+No Input
+
+-------------------------
+
+Method With Parameters
+↓
+
+Input Pass
+
+-------------------------
+
+Parameter
+↓
+
+Method Declaration
+
+-------------------------
+
+Argument
+↓
+
+Method Call
+
+-------------------------
+
+void
+↓
+
+No Return
+
+-------------------------
+
+return
+↓
+
+Return Value
+
+-------------------------
+
+Method Overloading
+↓
+
+Same Method Name
+
++
+
+Different Parameters

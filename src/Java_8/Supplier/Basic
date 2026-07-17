@@ -1,0 +1,11 @@
+1. Supplier kya hota hai?
+
+Supplier koi input nahi leta, lekin ek value return karta hai.
+
+Input ❌  →  Value Generate / Provide karta hai  →  Output ✅
+
+Simple formula:
+
+Predicate<T>     → Input leta hai  → boolean return
+Consumer<T>      → Input leta hai  → kuch return nahi
+Supplier<T>      → Input nahi leta → T type ki value return
